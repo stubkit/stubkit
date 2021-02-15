@@ -16,11 +16,8 @@
 </p>
 
 ### Introduction
-StubKit adds additional syntax and intelligent field mapping to output fully working features from Laravel's make commands. StubKit is also 100% opinion free and able to be configured however you want using blade templates & config files.
-
+StubKit adds additional syntax and intelligent field mapping to output fully working features from Laravel's make commands. StubKit is also 100% opinion free and able to be configured however you want using blade views.
 
 ### Official Documentation
-
 Documentation for StubKit can be found on the [StubKit website](https://stubkit.com).
-
 
