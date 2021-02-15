@@ -1,5 +1,7 @@
 <p align="center">
-    <img src="https://stubkit.com/assets/img/logo.png">
+    <a href="https://stubkit.com" title="Laravel Stubs on Steroids">
+        <img src="https://stubkit.com/assets/img/logo.png">
+    </a>
 </p>
 
 <p align="center">
