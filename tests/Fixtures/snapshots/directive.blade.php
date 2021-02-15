@@ -1,0 +1,1 @@
+{{ $post->created_at->diffForHumans() }}

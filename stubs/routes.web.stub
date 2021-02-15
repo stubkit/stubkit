@@ -1,0 +1,7 @@
+Route::get('{{ model.slugPlural }}', '{{ model.studly }}Controller@index')->name('{{ model.slugPlural }}.index');
+Route::get('{{ model.slugPlural }}/new', '{{ model.studly }}Controller@create')->name('{{ model.slugPlural }}.create');
+Route::post('{{ model.slugPlural }}/new', '{{ model.studly }}Controller@store')->name('{{ model.slugPlural }}.store');
+Route::get('{{ model.slugPlural }}/{{{ model.slug }}}', '{{ model.studly }}Controller@show')->name('{{ model.slugPlural }}.show');
+Route::get('{{ model.slugPlural }}/{{{ model.slug }}}/edit', '{{ model.studly }}Controller@edit')->name('{{ model.slugPlural }}.edit');
+Route::put('{{ model.slugPlural }}/{{{ model.slug }}}/edit', '{{ model.studly }}Controller@update')->name('{{ model.slugPlural }}.update');
+Route::delete('{{ model.slugPlural }}/{{{ model.slug }}}', '{{ model.studly }}Controller@destroy')->name('{{ model.slugPlural }}.destroy');

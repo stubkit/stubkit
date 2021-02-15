@@ -1,0 +1,1 @@
+$table->ip('{{ $field->snake() }}');

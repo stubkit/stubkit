@@ -1,0 +1,10 @@
+<h1>New {{ model.lower }}</h1>
+
+<div>
+    <form method="POST" action="{{ route('{{ model.slugPlural }}.store') }}" enctype="multipart/form-data">
+        {{ csrf_field() }}
+        {{ fields.create }}
+        <a href="{{ route('{{ model.slugPlural }}.index') }}">Cancel</a>
+        <button>Create</button>
+    </form>
+</div>

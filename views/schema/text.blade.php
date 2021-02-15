@@ -1,0 +1,1 @@
+$table->text('{{ $field->snake() }}');

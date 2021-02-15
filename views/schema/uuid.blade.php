@@ -1,0 +1,1 @@
+$table->uuid('{{ $field->snake() }}');

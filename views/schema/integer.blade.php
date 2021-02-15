@@ -1,0 +1,1 @@
+$table->integer('{{ $field->snake() }}');

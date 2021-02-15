@@ -1,0 +1,7 @@
+<h1>
+    {{ model.titlePlural }}: <a href="{{ route('{{ model.slugPlural }}.create') }}">New</a>
+</h1>
+
+<div>
+    {{ fields.index }}
+</div>

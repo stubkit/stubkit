@@ -1,0 +1,1 @@
+'{{ $field->snake() }}' => 'required|url',

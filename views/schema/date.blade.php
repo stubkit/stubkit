@@ -1,0 +1,1 @@
+$table->date('{{ $field->snake() }}');

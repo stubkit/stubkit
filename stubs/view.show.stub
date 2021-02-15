@@ -1,0 +1,20 @@
+<h1>
+    <a href="{{ route('{{ model.slugPlural }}.index') }}">
+        {{ model.titlePlural }}
+    </a>
+    <span>/ {{ ${{ model.camel }}->id }}</span>
+</h1>
+
+<div>
+    {{ fields.show }}
+
+    <a href="{{ route('{{ model.slugPlural }}.edit', ${{ model.camel }}) }}">
+        Edit
+    </a>
+
+    <form method="POST" action="{{ route('{{ model.slugPlural }}.destroy', ${{ model.camel }}) }}">
+        {{ csrf_field() }}
+        {{ method_field('DELETE') }}
+        <button>Delete</button>
+    </form>
+</div>

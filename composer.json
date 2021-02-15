@@ -1,0 +1,44 @@
+{
+    "name": "stubkit/stubkit",
+    "description": "Laravel stubs on steriods",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.3.0",
+        "symfony/process": "^5.2",
+        "symfony/finder": "^5.2",
+        "illuminate/support": "^8.23"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.9",
+        "phpunit/phpunit": "^9.2",
+        "spatie/laravel-ray": "^1.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "StubKit\\": "src/"
+        },
+        "files": [
+            "src/Support/Helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "StubKit\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "StubKit\\Providers\\StubKitProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

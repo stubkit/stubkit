@@ -1,0 +1,1 @@
+$table->time('{{ $field->snake() }}');

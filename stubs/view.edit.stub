@@ -1,0 +1,11 @@
+<h1>{{ model.title }} Edit</h1>
+
+<div>
+    <form method="POST" action="{{ route('{{ model.slugPlural }}.update', ${{ model.camel }}) }}" enctype="multipart/form-data">
+        {{ method_field('PUT') }}
+        {{ csrf_field() }}
+        {{ fields.edit }}
+        <a href="{{ route('{{ model.slugPlural }}.show', ${{ model.camel }}) }}">Cancel</a>
+        <button>Update</button>
+    </form>
+</div>
