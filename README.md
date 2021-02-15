@@ -1,4 +1,6 @@
-<p align="center"><img src="https://stubkit.com/assets/img/logo.png"></p>
+<p align="center">
+    <img src="https://stubkit.com/assets/img/logo.png">
+</p>
 
 <p align="center">
     <a href="https://github.com/stubkit/stubkit/actions">
