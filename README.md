@@ -1,4 +1,8 @@
-<p align="center"><img src="https://stubkit.com/assets/img/logo.png"></p>
+<p align="center">
+    <a href="https://stubkit.com" title="Laravel Stubs on Steroids">
+        <img src="https://stubkit.com/assets/img/logo.png">
+    </a>
+</p>
 
 <p align="center">
     <a href="https://github.com/stubkit/stubkit/actions">
@@ -9,9 +13,6 @@
     </a>
     <a href="https://packagist.org/packages/stubkit/stubkit">
         <img src="https://img.shields.io/packagist/v/stubkit/stubkit" alt="Latest Stable Version">
-    </a>
-    <a href="https://packagist.org/packages/stubkit/stubkit">
-        <img src="https://img.shields.io/packagist/l/stubkit/stubkit" alt="License">
     </a>
 </p>
 
