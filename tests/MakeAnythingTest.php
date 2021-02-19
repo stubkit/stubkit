@@ -38,7 +38,7 @@ class MakeAnythingTest extends TestCase
         }
 
         $this->assertTrue($worked);
-        $this->assertFalse(StubKit::allows('make:test'));
+        $this->assertTrue(StubKit::allows('make:test'));
     }
 
     public function test_commands_not_allowed_will_throw_invalid_options_exception()
@@ -53,8 +53,8 @@ class MakeAnythingTest extends TestCase
         } catch (\Exception $e) {
         }
 
-        $this->assertTrue(StubKit::allows(null)); // `php artisan`
-        $this->assertTrue(StubKit::allows('make:test'));
+        $this->assertFalse(StubKit::allows(null)); // `php artisan`
+        $this->assertFalse(StubKit::allows('make:test'));
         $this->assertFalse($worked);
     }
 }

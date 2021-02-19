@@ -8,9 +8,11 @@ class TrackModified
 {
     public function handle($event)
     {
-        if (StubKit::allows($event->command)) {
+        if (! StubKit::allows($event->command)) {
             return;
-        } elseif ($event->command == 'make:scaffold') {
+        }
+
+        if ($event->command == 'make:scaffold') {
             StubKit::scaffolding(true);
             StubKit::track();
         } elseif (! StubKit::scaffolding()) {

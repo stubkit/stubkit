@@ -2,8 +2,6 @@
 
 namespace StubKit\Tests;
 
-use StubKit\Facades\StubKit;
-
 class MakeViewsTest extends TestCase
 {
     public function test_make_views()

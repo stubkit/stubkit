@@ -26,11 +26,11 @@ class MakeScaffoldTest extends TestCase
     public function test_make_scaffold_type()
     {
         config()->set(['stubkit.scaffolds.default' => [
-            'make:views Account'
+            'make:views Account',
         ]]);
 
         config()->set(['stubkit.scaffolds.api' => [
-            'make:views User'
+            'make:views User',
         ]]);
 
         $this->artisan('make:scaffold User --scaffold=api');

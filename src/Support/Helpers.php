@@ -2,7 +2,7 @@
 
 if (! function_exists('stubkit')) {
     /**
-     * The StubKit expression helper
+     * The StubKit expression helper.
      * @param string $expression
      * @param array $variables
      * @return string

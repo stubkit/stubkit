@@ -25,7 +25,6 @@ class TestCase extends BaseCase
         mkdir(__DIR__.'/../vendor/orchestra/testbench-core/laravel/storage/framework/views');
     }
 
-
     protected function tearDown() :void
     {
         File::deleteDirectory(__DIR__.'/Fixtures/app');

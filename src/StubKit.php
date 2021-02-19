@@ -2,13 +2,13 @@
 
 namespace StubKit;
 
+use Closure;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\Assert;
 use StubKit\Support\Fields;
 use StubKit\Support\Item;
 use StubKit\Support\Syntax;
 use Symfony\Component\Finder\Finder;
-use Closure;
 
 class StubKit
 {
@@ -115,7 +115,7 @@ class StubKit
      */
     public function syntax(array $entities = [])
     {
-        if (!is_null($this->syntax)) {
+        if (! is_null($this->syntax)) {
             return $this->syntax;
         }
 
@@ -166,7 +166,7 @@ class StubKit
             ->notPath(config('stubkit.excludes'));
 
         if ($this->modified) {
-            $finder = $finder->date('>=' . $this->modified);
+            $finder = $finder->date('>='.$this->modified);
         }
 
         foreach ($finder as $file) {
@@ -263,7 +263,7 @@ class StubKit
     }
 
     /**
-     * Check if command is allowed
+     * Check if command is allowed.
      *
      * @param string $command
      *
@@ -271,8 +271,7 @@ class StubKit
      */
     public function allows($command = null)
     {
-        return is_null($command) ||
-            !in_array($command, config('stubkit.commands', []));
+        return ! is_null($command) && in_array($command, config('stubkit.commands', []));
     }
 
     /**
@@ -290,7 +289,7 @@ class StubKit
     }
 
     /**
-     * Get or set the scaffold fields string
+     * Get or set the scaffold fields string.
      * @param null $fields
      * @return string|void
      */
@@ -304,16 +303,16 @@ class StubKit
     }
 
     /**
-     * Check if in the process of scaffolding
+     * Check if in the process of scaffolding.
      * @return bool
      */
     public function scaffolding()
     {
-        return !is_null($this->scaffolding);
+        return ! is_null($this->scaffolding);
     }
 
     /**
-     * Manually add a file that was created for rendering
+     * Manually add a file that was created for rendering.
      * @param $path
      */
     public function created($path)
@@ -322,7 +321,7 @@ class StubKit
     }
 
     /**
-     * Manually add a file that was updated for rendering
+     * Manually add a file that was updated for rendering.
      * @param $path
      */
     public function updated($path)
@@ -331,7 +330,7 @@ class StubKit
     }
 
     /**
-     * Handle the use of the @stubkit directive
+     * Handle the use of the @stubkit directive.
      * @param $expression
      * @return string
      */
@@ -343,13 +342,13 @@ class StubKit
         $expression = trim($expression, '}}');
         $expression = str_replace('{{', '<::', $expression);
         $expression = str_replace('}}', '::>', $expression);
-        $expression = '@{{ ' . trim($expression) . ' }}';
+        $expression = '@{{ '.trim($expression).' }}';
 
         return "<?php echo \StubKit\Facades\StubKit::helper('${expression}', get_defined_vars()); ?>";
     }
 
     /**
-     * Handle usage of the stubkit() helper
+     * Handle usage of the stubkit() helper.
      * @param $expression
      * @param array $variables
      * @return string
@@ -364,7 +363,7 @@ class StubKit
                 unset($variables[$key]);
             } elseif (is_a($value, Item::class)) {
                 $variables[$key] = $value->field;
-            } elseif (!is_string($value)) {
+            } elseif (! is_string($value)) {
                 unset($variables[$key]);
             }
         }
@@ -385,14 +384,14 @@ class StubKit
     }
 
     /**
-     * Test assertion for callback / snapshot comparison
+     * Test assertion for callback / snapshot comparison.
      * @param Closure $actual
      * @param $expected
      */
     public function assertRender(Closure $actual, $expected)
     {
         $actual = call_user_func($actual);
-        $path = pathinfo($expected)['dirname'] . '/' . time() . '.txt';
+        $path = pathinfo($expected)['dirname'].'/'.time().'.txt';
         $expected = file_get_contents($expected);
         file_put_contents($path, $actual);
         $this->created($path);
@@ -427,7 +426,7 @@ class StubKit
     }
 
     /**
-     * Set or get the active field
+     * Set or get the active field.
      * @param null $field
      * @return string|void
      */

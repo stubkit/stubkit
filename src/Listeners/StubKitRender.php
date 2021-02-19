@@ -9,7 +9,7 @@ class StubKitRender
 {
     public function handle($event)
     {
-        if (StubKit::allows($event->command)) {
+        if (! StubKit::allows($event->command)) {
             return;
         }
 

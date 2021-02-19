@@ -30,12 +30,12 @@ class Fields
     {
         $output = '';
 
-        $items = (new Fields(
+        $items = (new self(
             config('stubkit-fields'),
             config('stubkit-mappings'),
         ))->get($type, $fields);
 
-        foreach($items as $item) {
+        foreach ($items as $item) {
             $output .= view($item->view())->with($item->data())->render();
         }
 

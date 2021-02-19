@@ -2,7 +2,6 @@
 
 namespace StubKit\Tests;
 
-use Illuminate\Support\Str;
 use PHPUnit\Framework\TestCase;
 use StubKit\Support\Syntax;
 
@@ -37,7 +36,7 @@ class SyntaxTest extends TestCase
     {
         $global = [
             'lower' => function ($value) {
-                return "This $value gets overridden by option";
+                return "This ${value} gets overridden by option";
             },
         ];
 

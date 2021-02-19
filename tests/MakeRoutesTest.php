@@ -2,8 +2,6 @@
 
 namespace StubKit\Tests;
 
-use StubKit\Facades\StubKit;
-
 class MakeRoutesTest extends TestCase
 {
     public function test_makes_web_routes()
