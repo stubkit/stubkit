@@ -5,6 +5,7 @@ namespace StubKit\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use StubKit\Commands\InstallCommand;
 use StubKit\Commands\RoutesMakeCommand;
 use StubKit\Commands\ScaffoldMakeCommand;
 use StubKit\Commands\ViewsMakeCommand;
@@ -22,6 +23,7 @@ class StubKitProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
+                InstallCommand::class,
                 ScaffoldMakeCommand::class,
                 RoutesMakeCommand::class,
                 ViewsMakeCommand::class,
