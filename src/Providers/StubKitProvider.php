@@ -48,20 +48,20 @@ class StubKitProvider extends ServiceProvider
         ], 'stubkit-config');
 
         $this->publishes([
-            __DIR__.'/../../views/fields' => resource_path('views/vendor/stubkit/fields'),
+            __DIR__.'/../../config/fields.php' => config_path('stubkit-fields.php'),
         ], 'stubkit-fields');
 
         $this->publishes([
-            __DIR__.'/../../views/mappings' => resource_path('views/vendor/stubkit/mappings'),
+            __DIR__.'/../../config/mappings.php' => config_path('stubkit-mappings.php'),
         ], 'stubkit-mappings');
 
         $this->publishes([
-            __DIR__.'/../../stubs/routes.web.stub' => base_path('stubs'),
-            __DIR__.'/../../stubs/routes.api.stub' => base_path('stubs'),
-            __DIR__.'/../../stubs/view.create.stub' => base_path('stubs'),
-            __DIR__.'/../../stubs/view.edit.stub' => base_path('stubs'),
-            __DIR__.'/../../stubs/view.index.stub' => base_path('stubs'),
-            __DIR__.'/../../stubs/view.show.stub' => base_path('stubs'),
+            __DIR__.'/../../stubs/routes.web.stub' => base_path('stubs/routes.web.stub'),
+            __DIR__.'/../../stubs/routes.api.stub' => base_path('stubs/routes.api.stub'),
+            __DIR__.'/../../stubs/view.create.stub' => base_path('stubs/view.create.stub'),
+            __DIR__.'/../../stubs/view.edit.stub' => base_path('stubs/view.edit.stub'),
+            __DIR__.'/../../stubs/view.index.stub' => base_path('stubs/view.index.stub'),
+            __DIR__.'/../../stubs/view.show.stub' => base_path('stubs/view.show.stub'),
         ], 'stubkit-stubs');
 
         Str::macro('reset', function ($value) {

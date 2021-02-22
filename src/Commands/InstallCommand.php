@@ -34,7 +34,7 @@ class InstallCommand extends Command
         $this->comment('Publishing Laravel Stubs...');
         $this->callSilent('stub:publish');
         $this->comment('Publishing StubKit Stubs...');
-        $this->callSilent('vendor:publish', ['--tag' => 'stubkit-stubs']);
+        $this->callSilent('vendor:publish', ['--tag' => 'stubkit-stubs', '--force' => true]);
         return 1;
     }
 }
