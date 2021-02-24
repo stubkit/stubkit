@@ -4,6 +4,7 @@ namespace StubKit\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use StubKit\Facades\StubKit;
 use StubKit\Support\Syntax;
@@ -126,8 +127,13 @@ class ScaffoldMakeCommand extends Command
      */
     public function needsNewProcess($command)
     {
-        return Str::startsWith($command, 'test')
-            || Str::startsWith($command, 'composer');
+        $commands = array_keys(Artisan::all());
+
+        $command = Str::contains($command, ' ')
+            ? explode(' ', $command, 2)[0]
+            : $command;
+
+        return ! in_array($command, $commands) || $command == 'test';
     }
 
     /**
