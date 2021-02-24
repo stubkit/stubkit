@@ -116,7 +116,7 @@ class ScaffoldMakeCommand extends Command
             $output = $e->getMessage();
         }
 
-        $this->info(rtrim($output)."\n");
+        $this->info(trim($output)."\n");
 
         return $output;
     }
@@ -145,7 +145,7 @@ class ScaffoldMakeCommand extends Command
      */
     public function handleCommandWithNewProcess(string $command)
     {
-        if (Str::start($command, 'test')) {
+        if (Str::startsWith($command, 'test')) {
             $command = "php artisan ${command}";
         }
 
@@ -181,9 +181,9 @@ class ScaffoldMakeCommand extends Command
      */
     public function heading(string $phrase)
     {
-        $this->comment("----------------------------------------------------------\n");
+        $this->comment("----------------------------------------------------------");
         $this->comment("| ${phrase}\n");
-        $this->comment("----------------------------------------------------------\n");
+        $this->comment("----------------------------------------------------------");
     }
 
     public function asciiHeader()
