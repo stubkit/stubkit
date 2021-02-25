@@ -64,6 +64,15 @@ class StubKitProvider extends ServiceProvider
             __DIR__.'/../../stubs/view.show.stub' => base_path('stubs/view.show.stub'),
         ], 'stubkit-stubs');
 
+        $this->publishes([
+            __DIR__.'/../../stubs/controller.model.api.stub' => base_path('stubs/controller.model.api.stub'),
+            __DIR__.'/../../stubs/controller.model.stub' => base_path('stubs/controller.model.stub'),
+            __DIR__.'/../../stubs/factory.stub' => base_path('stubs/factory.stub'),
+            __DIR__.'/../../stubs/migration.create.stub' => base_path('stubs/migration.create.stub'),
+            __DIR__.'/../../stubs/request.stub' => base_path('stubs/request.stub'),
+            __DIR__.'/../../stubs/test.stub' => base_path('stubs/test.stub'),
+        ], 'stubkit-stub-overrides');
+
         Str::macro('reset', function ($value) {
             return Str::of($value)->snake()->replace('_', ' ')->singular();
         });

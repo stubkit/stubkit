@@ -11,7 +11,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'stubkit:install';
+    protected $signature = 'stubkit:install {--no-overrides}';
 
     /**
      * The console command description.
@@ -34,7 +34,13 @@ class InstallCommand extends Command
         $this->comment('Publishing Laravel Stubs...');
         $this->callSilent('stub:publish');
         $this->comment('Publishing StubKit Stubs...');
-        $this->callSilent('vendor:publish', ['--tag' => 'stubkit-stubs', '--force' => true]);
+        $this->callSilent('vendor:publish', ['--tag' => 'stubkit-stubs']);
+        if(!$this->hasOption('no-overrides')) {
+            $this->callSilent('vendor:publish', [
+                '--tag' => 'stubkit-stub-overrides',
+                '--force' => true,
+            ]);
+        }
         return 1;
     }
 }

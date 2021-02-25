@@ -17,7 +17,7 @@ class ScaffoldMakeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:scaffold {name} {--scaffold=} {--fields=}';
+    protected $signature = 'make:scaffold {name} {--type=} {--fields=}';
 
     /**
      * The console command description.
@@ -81,7 +81,7 @@ class ScaffoldMakeCommand extends Command
      */
     public function getCommands()
     {
-        if ($type = $this->option('scaffold')) {
+        if ($type = $this->option('type')) {
             return config("stubkit.scaffolds.{$type}", []);
         } else {
             return config('stubkit.scaffolds.default', []);
