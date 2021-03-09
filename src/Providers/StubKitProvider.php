@@ -43,6 +43,38 @@ class StubKitProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__.'/../../views', 'stubkit');
 
+        $this->handlePublishingAssets();
+
+        Str::macro('reset', function ($value) {
+            return Str::of($value)->snake()->replace('_', ' ')->singular();
+        });
+
+        Blade::directive('stubkit', function ($expression) {
+            return \StubKit\Facades\StubKit::directive($expression);
+        });
+    }
+
+    /**
+     * Register the provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->register(EventServiceProvider::class);
+
+        $this->mergeConfigFrom(__DIR__.'/../../config/stubkit.php', 'stubkit');
+        $this->mergeConfigFrom(__DIR__.'/../../config/fields.php', 'stubkit-fields');
+        $this->mergeConfigFrom(__DIR__.'/../../config/mappings.php', 'stubkit-mappings');
+    }
+
+    /**
+     * Register the publishables.
+     *
+     * @return void
+     */
+    public function handlePublishingAssets()
+    {
         $this->publishes([
             __DIR__.'/../../config/stubkit.php' => config_path('stubkit.php'),
         ], 'stubkit-config');
@@ -72,27 +104,5 @@ class StubKitProvider extends ServiceProvider
             __DIR__.'/../../stubs/request.stub' => base_path('stubs/request.stub'),
             __DIR__.'/../../stubs/test.stub' => base_path('stubs/test.stub'),
         ], 'stubkit-stub-overrides');
-
-        Str::macro('reset', function ($value) {
-            return Str::of($value)->snake()->replace('_', ' ')->singular();
-        });
-
-        Blade::directive('stubkit', function ($expression) {
-            return \StubKit\Facades\StubKit::directive($expression);
-        });
-    }
-
-    /**
-     * Register the provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->app->register(EventServiceProvider::class);
-
-        $this->mergeConfigFrom(__DIR__.'/../../config/stubkit.php', 'stubkit');
-        $this->mergeConfigFrom(__DIR__.'/../../config/fields.php', 'stubkit-fields');
-        $this->mergeConfigFrom(__DIR__.'/../../config/mappings.php', 'stubkit-mappings');
     }
 }
