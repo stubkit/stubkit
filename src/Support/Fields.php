@@ -122,7 +122,7 @@ class Fields
         $selected = Arr::get($this->mappings, $field);
 
         if (is_null($selected)) {
-            $selected = $this->checkWildcards($field);
+            $selected = $this->findRegexColumn($field);
 
             if (is_null($selected)) {
                 return $this->fields['default'];
@@ -154,7 +154,7 @@ class Fields
      *
      * @return string
      */
-    public function checkWildcards(string $field)
+    public function findRegexColumn(string $field)
     {
         foreach ($this->mappings as $regex => $mapping) {
             if (! Str::startsWith($regex, '/')) {
