@@ -2,6 +2,7 @@
 
 namespace StubKit\Tests;
 
+use Exception;
 use Illuminate\Support\Str;
 use PHPUnit\Framework\TestCase;
 use StubKit\Support\Fields;
@@ -212,7 +213,7 @@ class FieldTest extends TestCase
             $outcome = in_array($fieldType, array_keys($this->fieldConfig));
 
             if (! $outcome) {
-                throw new \Exception("field type: ${fieldType} is undefined.");
+                throw new Exception("field type: ${fieldType} is undefined.");
             }
 
             $this->assertTrue($outcome);
@@ -230,7 +231,7 @@ class FieldTest extends TestCase
                 $this->assertTrue(file_exists(__DIR__."/../views/${view}.blade.php"));
 
                 if (! file_exists(__DIR__."/../views/${view}.blade.php")) {
-                    throw new \Exception("${view} doesnt exist. definition: ${definition}");
+                    throw new Exception("${view} doesnt exist. definition: ${definition}");
                 }
             }
         }
@@ -252,7 +253,7 @@ class FieldTest extends TestCase
                 if (Str::endsWith($content, "\n") || $content == '') {
                     $this->assertTrue(true);
                 } else {
-                    throw new \Exception("${folder} / {$file->getFilename()} needs to end with a a new line.\n{$file->getRealPath()}");
+                    throw new Exception("${folder} / {$file->getFilename()} needs to end with a a new line.\n{$file->getRealPath()}");
                 }
             }
         }

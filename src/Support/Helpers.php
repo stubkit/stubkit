@@ -1,5 +1,7 @@
 <?php
 
+use StubKit\Facades\StubKit;
+
 if (! function_exists('stubkit')) {
     /**
      * The StubKit expression helper.
@@ -9,6 +11,6 @@ if (! function_exists('stubkit')) {
      */
     function stubkit(string $expression, array $variables = [])
     {
-        return \StubKit\Facades\StubKit::helper($expression, $variables);
+        return StubKit::helper($expression, $variables);
     }
 }

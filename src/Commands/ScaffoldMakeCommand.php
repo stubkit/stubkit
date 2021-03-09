@@ -2,6 +2,7 @@
 
 namespace StubKit\Commands;
 
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Support\Facades\Artisan;
@@ -112,7 +113,7 @@ class ScaffoldMakeCommand extends Command
                 $process->call($command);
                 $output = $process->output();
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $output = $e->getMessage();
         }
 

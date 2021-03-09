@@ -2,6 +2,7 @@
 
 namespace StubKit\Tests;
 
+use Exception;
 use StubKit\Facades\StubKit;
 
 class MakeAnythingTest extends TestCase
@@ -33,7 +34,7 @@ class MakeAnythingTest extends TestCase
         try {
             $this->artisan('make:test User --invalid-option');
             $worked = true;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->assertFalse(true); // doesn't get called
         }
 
@@ -50,7 +51,7 @@ class MakeAnythingTest extends TestCase
         try {
             $this->artisan('make:test User --invalid-option');
             $worked = true;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
         }
 
         $this->assertFalse(StubKit::allows(null)); // `php artisan`

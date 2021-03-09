@@ -2,6 +2,7 @@
 
 namespace StubKit\Listeners;
 
+use Illuminate\Console\Events\CommandFinished;
 use Illuminate\Support\Str;
 use StubKit\Facades\StubKit;
 
@@ -25,7 +26,7 @@ class StubKitRender
     /**
      * Convert arguments and options into syntax.
      *
-     * @param \Illuminate\Console\Events\CommandFinished $event
+     * @param CommandFinished $event
      *
      * @return void
      */
