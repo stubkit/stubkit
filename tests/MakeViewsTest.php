@@ -26,7 +26,6 @@ class MakeViewsTest extends TestCase
     public function test_make_views_with_fields()
     {
         $this->artisan('make:views Page --fields="name,age,published_at"');
-        $route = file_get_contents(base_path('routes/web.php'));
         $view = file_get_contents(base_path('resources/views/pages/index.blade.php'));
         $this->assertStringContainsString('{{ $page->name }}', $view);
         $this->assertStringContainsString('{{ $page->age }}', $view);
