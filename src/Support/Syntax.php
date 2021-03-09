@@ -21,7 +21,7 @@ class Syntax
     {
         foreach ($this->variables as $search => $replace) {
             $content = preg_replace_callback("/\s*{{\s*${search}\s*}}/", function ($matches) use ($replace) {
-                preg_match('/(\s*)\{\{/', $matches[0], $space);
+                preg_match('/(\s*){{/', $matches[0], $space);
 
                 if (! isset($replace['callback'])) {
                     $replace = ['value' => $replace, 'callback' => ''];

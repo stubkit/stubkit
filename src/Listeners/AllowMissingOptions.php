@@ -34,7 +34,7 @@ class AllowMissingOptions
         $options = explode(' ', $options);
 
         foreach ($options as $option) {
-            preg_match('/\-\-([\w\_\-]+)/', $option, $matches);
+            preg_match('/--([\w_\-]+)/', $option, $matches);
 
             if (! isset($matches[1])) {
                 continue;
