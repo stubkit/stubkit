@@ -8,6 +8,15 @@ use Illuminate\Support\Str;
 class Fields
 {
     /**
+     * @var array
+     */
+    private $fields;
+    /**
+     * @var array
+     */
+    private $mappings;
+
+    /**
      * Construct the fields.
      *
      * @param array $fields
