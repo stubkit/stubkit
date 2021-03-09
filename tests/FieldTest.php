@@ -24,8 +24,8 @@ class FieldTest extends TestCase
             $this->mappingConfig,
         );
 
-        str::macro('reset', function ($value) {
-            return str::of($value)->snake()->replace('_', ' ');
+        Str::macro('reset', function ($value) {
+            return Str::of($value)->snake()->replace('_', ' ');
         });
     }
 
