@@ -53,8 +53,8 @@ class ScaffoldMakeCommand extends Command
     {
         $this->asciiHeader();
 
-        StubKit::scaffold($this->argument('name'));
-        StubKit::fields($this->option('fields'));
+        StubKit::setScaffold($this->argument('name'));
+        StubKit::setFields($this->option('fields'));
 
         $this->syntax->make([
             'scaffold' => $this->argument('name'),

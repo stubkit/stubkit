@@ -84,7 +84,7 @@ class StubKit
     {
         $syntax = $this->syntax();
 
-        $files = $this->getTracked();
+        $files = $this->tracked();
 
         foreach ($files as $path) {
             $content = file_get_contents($path);
@@ -135,12 +135,12 @@ class StubKit
      *
      * @return array
      */
-    public function getTracked()
+    public function tracked()
     {
         $files = $this->created;
 
         if (count($this->created) == 0) {
-            $files = $this->getModifiedFiles();
+            $files = $this->modified();
         }
 
         $files = array_diff($files, $this->ignored);
@@ -156,7 +156,7 @@ class StubKit
      *
      * @return array
      */
-    public function getModifiedFiles()
+    public function modified()
     {
         $files = [];
 
@@ -275,30 +275,40 @@ class StubKit
     }
 
     /**
-     * Get or set the scaffold name.
-     * @param null $name
-     * @return void|string
+     * Get the scaffold name.
+     * @return string
      */
-    public function scaffold($name = null)
+    public function scaffold()
     {
-        if (is_null($name)) {
-            return $this->scaffolding;
-        }
+        return $this->scaffolding;
+    }
 
+    /**
+     * Set the scaffold name.
+     * @param string $name
+     * @return void
+     */
+    public function setScaffold($name)
+    {
         $this->scaffolding = $name;
     }
 
     /**
-     * Get or set the scaffold fields string.
-     * @param null $fields
+     * Get the scaffold fields string.
      * @return string|void
      */
-    public function fields($fields = null)
+    public function fields()
     {
-        if (is_null($fields)) {
-            return $this->fields;
-        }
+        return $this->fields;
+    }
 
+    /**
+     * Set the scaffold fields string.
+     * @param string $fields
+     * @return void
+     */
+    public function setFields($fields)
+    {
         $this->fields = $fields;
     }
 
