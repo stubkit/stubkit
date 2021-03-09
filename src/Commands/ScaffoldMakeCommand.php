@@ -30,7 +30,7 @@ class ScaffoldMakeCommand extends Command
     /**
      * StubKit Syntax Instance.
      *
-     * @var \StubKit\Support\Syntax
+     * @var Syntax
      */
     public $syntax;
 
@@ -182,9 +182,9 @@ class ScaffoldMakeCommand extends Command
      */
     public function heading(string $phrase)
     {
-        $this->comment("----------------------------------------------------------");
+        $this->comment('----------------------------------------------------------');
         $this->comment("| ${phrase}\n");
-        $this->comment("----------------------------------------------------------");
+        $this->comment('----------------------------------------------------------');
     }
 
     public function asciiHeader()
