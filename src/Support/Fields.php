@@ -158,6 +158,8 @@ class Fields
                 return $mapping;
             }
         }
+
+        return null;
     }
 
     /**
@@ -172,7 +174,7 @@ class Fields
             $this->fields['default'][$type] = $view;
         }
 
-        foreach (Arr::except($fields, 'default', []) as $type => $keyValue) {
+        foreach (Arr::except($fields, 'default') as $type => $keyValue) {
             $this->fields[$type] = array_merge(
                 $this->fields[$type],
                 $keyValue
