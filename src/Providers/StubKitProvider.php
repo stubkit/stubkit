@@ -31,7 +31,7 @@ class StubKitProvider extends ServiceProvider
         }
 
         $this->app->singleton(StubKit::class, function () {
-            return new StubKit;
+            return new StubKit();
         });
 
         $this->app->bind(Fields::class, function () {

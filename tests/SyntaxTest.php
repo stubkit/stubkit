@@ -10,7 +10,7 @@ class SyntaxTest extends TestCase
     public function test_syntax_globals()
     {
         $config = require __DIR__.'/../config/stubkit.php';
-        $syntax = (new Syntax)->make(
+        $syntax = (new Syntax())->make(
             ['resource' => 'UserAccount'],
             $config['variables']['*']
         );
@@ -48,7 +48,7 @@ class SyntaxTest extends TestCase
             ],
         ];
 
-        $output = (new Syntax)
+        $output = (new Syntax())
             ->make(['user' => 'SARA'], $global, $variables)
             ->parse('{{ user.lower }}');
 
@@ -63,7 +63,7 @@ class SyntaxTest extends TestCase
             },
         ];
 
-        $value = (new Syntax)
+        $value = (new Syntax())
             ->make([], [], $variables)
             ->parse('{{ url }}');
 
@@ -78,7 +78,7 @@ class SyntaxTest extends TestCase
             },
         ];
 
-        $output = (new Syntax)
+        $output = (new Syntax())
             ->make(['user' => 'sara'], [], $variables)
             ->parse('{{ user }}');
 
@@ -87,7 +87,7 @@ class SyntaxTest extends TestCase
 
     public function test_syntax_skips_boolean_variables()
     {
-        $syntax = (new Syntax)->make([
+        $syntax = (new Syntax())->make([
             'help' => true,
             'no-interaction' => false,
             'empty' => '',
@@ -105,7 +105,7 @@ class SyntaxTest extends TestCase
         $expected = file_get_contents(__DIR__.'/Fixtures/indentation-1/expected.txt');
         $variable = file_get_contents(__DIR__.'/Fixtures/indentation-1/variable.txt');
 
-        $syntax = new Syntax;
+        $syntax = new Syntax();
         $syntax->setVariables(['fields.rules' => $variable]);
         $output = $syntax->parse($stub);
         $this->assertEquals($expected, $output);
@@ -117,7 +117,7 @@ class SyntaxTest extends TestCase
         $expected = file_get_contents(__DIR__.'/Fixtures/indentation-2/expected.txt');
         $variable = file_get_contents(__DIR__.'/Fixtures/indentation-2/variable.txt');
 
-        $syntax = new Syntax;
+        $syntax = new Syntax();
         $syntax->setVariables(['fields.inputs' => $variable]);
         $output = $syntax->parse($stub);
         $this->assertEquals($expected, $output);
@@ -125,7 +125,7 @@ class SyntaxTest extends TestCase
 
     public function test_syntax_output_variable_content_with_single_space_before()
     {
-        $syntax = new Syntax;
+        $syntax = new Syntax();
         $syntax->setVariables(['model.studly' => 'User']);
         $output = $syntax->parse(' {{ model.studly }}');
         $this->assertEquals(' User', $output);
@@ -133,7 +133,7 @@ class SyntaxTest extends TestCase
 
     public function test_syntax_output_variable_content_with_single_space_after()
     {
-        $syntax = new Syntax;
+        $syntax = new Syntax();
         $syntax->setVariables(['model.studly' => 'User']);
         $output = $syntax->parse('{{ model.studly }} ');
         $this->assertEquals('User ', $output);
@@ -141,7 +141,7 @@ class SyntaxTest extends TestCase
 
     public function test_syntax_output_variable_content_with_single_space_before_after()
     {
-        $syntax = new Syntax;
+        $syntax = new Syntax();
         $syntax->setVariables(['model.studly' => 'User']);
         $output = $syntax->parse(' {{ model.studly }} ');
         $this->assertEquals(' User ', $output);

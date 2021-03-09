@@ -47,7 +47,7 @@ class RoutesMakeCommand extends Command
         $content = file_get_contents($source);
         $current = file_get_contents(base_path($path));
 
-        $syntax = (new Syntax)->make(
+        $syntax = (new Syntax())->make(
             ['model' => $this->argument('name')],
             config('stubkit.variables.*', [])
         );

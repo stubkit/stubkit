@@ -119,7 +119,7 @@ class StubKit
             return $this->syntax;
         }
 
-        $this->syntax = new Syntax;
+        $this->syntax = new Syntax();
 
         $this->syntax->make(
             $entities,
@@ -160,7 +160,7 @@ class StubKit
     {
         $files = [];
 
-        $finder = (new Finder)
+        $finder = (new Finder())
             ->files()
             ->in(base_path())
             ->notPath(config('stubkit.excludes'));
@@ -208,7 +208,7 @@ class StubKit
     {
         $stubs = [];
 
-        foreach ((new Finder)->in($path) as $file) {
+        foreach ((new Finder())->in($path) as $file) {
             $stubs[$file->getPathname()] = base_path("${destination}/{$file->getBasename()}");
         }
 
@@ -369,7 +369,7 @@ class StubKit
         }
 
         if (count($variables)) {
-            $syntax = new Syntax;
+            $syntax = new Syntax();
             $syntax->setVariables($this->syntax()->all());
             $syntax->mergeMake(
                 $variables,

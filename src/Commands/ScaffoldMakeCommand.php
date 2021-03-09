@@ -40,7 +40,7 @@ class ScaffoldMakeCommand extends Command
     {
         parent::__construct();
 
-        $this->syntax = new Syntax;
+        $this->syntax = new Syntax();
     }
 
     /**

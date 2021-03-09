@@ -40,7 +40,7 @@ class MakeScaffoldTest extends TestCase
 
     public function test_migration_exception_handling()
     {
-        $make = new ScaffoldMakeCommand;
+        $make = new ScaffoldMakeCommand();
 
         $this->assertEquals(
             "Table already exists!\n",

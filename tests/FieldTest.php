@@ -242,7 +242,7 @@ class FieldTest extends TestCase
 
         foreach ($folders as $folder) {
             $this->assertTrue(is_dir(__DIR__."/../views/${folder}"));
-            foreach ((new Finder)->files()->in(__DIR__."/../views/${folder}") as $file) {
+            foreach ((new Finder())->files()->in(__DIR__."/../views/${folder}") as $file) {
                 if (Str::endsWith($file->getRealPath(), 'inputs/base.php')) {
                     continue;
                 }
