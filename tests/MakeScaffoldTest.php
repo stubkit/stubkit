@@ -33,7 +33,7 @@ class MakeScaffoldTest extends TestCase
             'make:views User',
         ]]);
 
-        $this->artisan('make:scaffold User --scaffold=api');
+        $this->artisan('make:scaffold User --type=api');
         $this->assertFalse(is_dir(resource_path('/views/accounts')));
         $this->assertTrue(is_dir(resource_path('/views/users')));
     }

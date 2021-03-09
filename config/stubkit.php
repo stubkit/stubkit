@@ -9,7 +9,7 @@ return [
     | Scaffolds
     |--------------------------------------------------------------------------
     | Groups of commands to run together when php artisan scaffold is run
-    | Without a --scaffold=name, * group will be used as a default type
+    | Without a --type=<name>, * group will be used as a default type
     | You can add different groups of commands for different needs.
     |--------------------------------------------------------------------------
     */
