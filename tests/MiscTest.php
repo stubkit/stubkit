@@ -72,16 +72,6 @@ class MiscTest extends TestCase
         );
     }
 
-    public function test_as_blade_variable()
-    {
-        $item = new Item('index', 'created_at', 'stubkit::index');
-
-        $this->assertEquals(
-            '{{ ${{ model.camel }}->created_at }}',
-            $item->asBladeVariable()
-        );
-    }
-
     public function test_kitchen_sink()
     {
         $basepath = __DIR__.'/Fixtures/directory-1';

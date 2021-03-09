@@ -80,14 +80,4 @@ class Item
 
         return $this->data[$key];
     }
-
-    /**
-     * @return string
-     */
-    public function asBladeVariable()
-    {
-        $field = Str::reset($this->field)->snake();
-
-        return '{{ ${{ model.camel }}->'.$field.' }}';
-    }
 }
