@@ -1,7 +1,8 @@
 @php
     if(isset($value) && $value == 'old.create') {
         $value = stubkit("{{ old('{{ field.snake }}') }}", get_defined_vars());
-    } else if(isset($value) && $value == 'old.edit') {
+    }
+    if(isset($value) && $value == 'old.edit') {
         $value = stubkit("{{ old('{{ field.snake }}', \${{ model.camel }}->{{ field.snake }}) }}", get_defined_vars());
     }
 @endphp
