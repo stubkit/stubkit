@@ -12,8 +12,7 @@ class AllowMissingOptions
     /**
      * Add missing options to the command.
      *
-     * @param string $command
-     * @param array $options
+     * @param $event
      *
      * @return void
      */
