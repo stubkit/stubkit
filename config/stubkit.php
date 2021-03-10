@@ -196,7 +196,5 @@ return [
    | These settings refer to the make:views command.
    |--------------------------------------------------------------------------
    */
-    'views' => [
-        'path' => 'views/{{model.slugPlural}}/{{view.slug}}.blade.php',
-    ]
+    'view_path' => 'views/{{model.slugPlural}}/{{view.slug}}.blade.php',
 ];
