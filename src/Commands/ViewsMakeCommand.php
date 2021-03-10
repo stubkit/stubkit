@@ -5,6 +5,7 @@ namespace StubKit\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use StubKit\Support\Syntax;
 
 class ViewsMakeCommand extends Command
 {
@@ -50,17 +51,7 @@ class ViewsMakeCommand extends Command
      */
     public function handle()
     {
-        $folder = $this->getFolder();
-
-        if (is_dir(resource_path("views/${folder}"))) {
-            $this->info('Views already exists!');
-
-            return 1;
-        }
-
         $all = $this->isUsingAllViews();
-
-        mkdir(resource_path("views/${folder}"));
 
         foreach ($this->views as $index => $view) {
             if (! $all && ! $this->option($view)) {
@@ -68,22 +59,14 @@ class ViewsMakeCommand extends Command
                 continue;
             }
 
-            $this->makeView($folder, $view);
+            if(! $this->makeView($view)) {
+                return 1;
+            }
         }
 
         $this->handleOutput();
 
         return 0;
-    }
-
-    /**
-     * Make a folder name based on argument.
-     *
-     * @return string
-     */
-    public function getFolder()
-    {
-        return Str::reset($this->argument('name'))->plural()->slug();
     }
 
     /**
@@ -99,13 +82,27 @@ class ViewsMakeCommand extends Command
     /**
      * Locate and make the view with the found stub.
      *
-     * @param string $folder
      * @param string $view
      *
-     * @return void
+     * @return bool
      */
-    public function makeView(string $folder, string $view)
+    public function makeView(string $view)
     {
+//        $path = config('stubkit.views.path', 'js/Pages/{{model.studlyPlural}}/{{view.studly}}.vue');
+        $path = config('stubkit.view_path');
+
+        $values = [
+            'view' => $view,
+            'model' => Str::reset($this->argument('name'))
+        ];
+
+        $syntax = (new Syntax())->make(
+            $values,
+            config('stubkit.variables.*', [])
+        );
+
+        $path = $syntax->parse($path);
+
         if (file_exists(base_path("stubs/view.${view}.stub"))) {
             $stub = base_path("stubs/view.${view}.stub");
         } elseif (file_exists(__DIR__."/../../stubs/view.${view}.stub")) {
@@ -114,14 +111,23 @@ class ViewsMakeCommand extends Command
             $stub = false;
         }
 
-        $content = ($stub)
-            ? file_get_contents($stub)
-            : '';
+        $path = resource_path($path);
 
-        file_put_contents(
-            resource_path("views/${folder}/${view}.blade.php"),
-            $content
-        );
+        $content = ($stub) ? file_get_contents($stub) : '';
+
+        $folder = Str::beforeLast($path, DIRECTORY_SEPARATOR);
+
+        if (file_exists($path)) {
+            $this->info('Views already exists!');
+
+            return false;
+        }
+
+        if(! is_dir($folder)) {
+            mkdir($folder, 0777, true);
+        }
+
+        return file_put_contents($path, $content);
     }
 
     /**

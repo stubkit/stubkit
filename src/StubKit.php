@@ -4,6 +4,7 @@ namespace StubKit;
 
 use Closure;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Stringable;
 use PHPUnit\Framework\Assert;
 use StubKit\Support\Fields;
 use StubKit\Support\Item;
@@ -373,6 +374,8 @@ class StubKit
                 unset($variables[$key]);
             } elseif (is_a($value, Item::class)) {
                 $variables[$key] = $value->field;
+            } elseif (is_a($value, Stringable::class)) {
+                $variables[$key] = (string) $value;
             } elseif (! is_string($value)) {
                 unset($variables[$key]);
             }

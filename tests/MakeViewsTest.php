@@ -50,7 +50,8 @@ class MakeViewsTest extends TestCase
 
     public function test_make_views_when_already_exists()
     {
-        mkdir(__DIR__.'/Fixtures/app/resources/views/users');
+        mkdir(__DIR__.'/Fixtures/app/resources/views/users', 0777, true);
+        file_put_contents(__DIR__.'/Fixtures/app/resources/views/users/index.blade.php', '');
 
         $this->artisan('make:views User')
             ->expectsOutput('Views already exists!')

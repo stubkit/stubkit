@@ -21,7 +21,6 @@ class Syntax
     {
         foreach ($this->variables as $search => $replace) {
             $content = preg_replace_callback("/\s*{{\s*${search}\s*}}/", function ($matches) use ($replace) {
-                preg_match('/(\s*){{/', $matches[0], $space);
 
                 if (! isset($replace['callback'])) {
                     $replace = ['value' => $replace, 'callback' => ''];
@@ -35,6 +34,8 @@ class Syntax
 
                 $lines = explode("\n", $value);
 
+                preg_match('/(\s*){{/', $matches[0], $space);
+
                 if (count($lines) == 1) {
                     return $space[1].implode('', $lines);
                 }
@@ -45,6 +46,7 @@ class Syntax
 
                 return rtrim(implode('', $lines));
             }, $content);
+
         }
 
         return $content;
