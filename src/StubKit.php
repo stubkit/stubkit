@@ -116,11 +116,13 @@ class StubKit
      */
     public function syntax(array $entities = [])
     {
-        if (! is_null($this->syntax)) {
-            return $this->syntax;
+        if (is_null($this->syntax)) {
+            $this->syntax = new Syntax();
         }
 
-        $this->syntax = new Syntax();
+        if(empty($entities)) {
+            return $this->syntax;
+        }
 
         $this->syntax->make(
             $entities,
