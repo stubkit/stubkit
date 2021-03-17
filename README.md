@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://stubkit.com" title="Laravel Stubs on Steroids">
-        <img src="https://stubkit.com/assets/img/logo.png">
+        <img width="100%" alt="Laravel Stub Customization" src="https://user-images.githubusercontent.com/29180903/110603074-a0350f80-8154-11eb-949f-a22e8b9e4034.png">
     </a>
 </p>
 

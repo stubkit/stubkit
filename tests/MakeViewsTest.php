@@ -57,4 +57,16 @@ class MakeViewsTest extends TestCase
             ->expectsOutput('Views already exists!')
             ->assertExitCode(1);
     }
+
+    public function test_view_path_using_variables()
+    {
+        config()->set('stubkit.views.stubs', ['create-{{model.studly}}-form']);
+        config()->set('stubkit.views.path', 'resources/js/Pages/{{model.studlyPlural}}/{{view.studly}}.vue');
+
+        mkdir(__DIR__.'/Fixtures/app/stubs');
+        file_put_contents(__DIR__.'/Fixtures/app/stubs/view.create-{{model.studly}}-form.stub', '');
+        $this->artisan('make:views User');
+
+        $this->assertFileExists(base_path('resources/js/Pages/Users/CreateUserForm.vue'));
+    }
 }
