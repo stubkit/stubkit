@@ -62,47 +62,9 @@ class Syntax
      */
     public function make(array $values = [], array $globals = [], array $variables = [])
     {
-        $values = array_filter($values, function ($value) {
-            return ! is_bool($value) && $value != '';
-        });
+        $helper = new Variables($globals, $variables, $this->variables);
 
-        foreach ($variables as $key => $value) {
-            $variable = array_key_exists($key, $values) ? $values[$key] : '';
-
-            $this->variables[$key] = ['callback' => '', 'value' => $variable];
-
-            if (is_array($value)) {
-                foreach ($value as $child => $callback) {
-                    $this->variables["${key}.${child}"] = [
-                        'callback' => $callback,
-                        'value' => $variable,
-                    ];
-                }
-            } else {
-                $this->variables[$key] = [
-                    'callback' => $value,
-                    'value' => $variable,
-                ];
-            }
-        }
-
-        foreach ($values as $key => $value) {
-            if (isset($this->variables[$key])) {
-                continue;
-            }
-
-            $this->variables[$key] = [
-                'callback' => '',
-                'value' => $value,
-            ];
-
-            foreach ($globals as $global => $callback) {
-                $this->variables[$key.'.'.$global] = [
-                    'callback' => $callback,
-                    'value' => $value,
-                ];
-            }
-        }
+        $this->variables = $helper->make($values);
 
         return $this;
     }
