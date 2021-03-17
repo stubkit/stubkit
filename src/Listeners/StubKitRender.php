@@ -14,9 +14,6 @@ class StubKitRender
             return;
         }
 
-        if (StubKit::scaffolding() && $event->command != 'make:scaffold') {
-            return;
-        }
 
         $this->prepareSyntax($event);
 
