@@ -39,9 +39,7 @@ class ViewsMakeCommand extends Command
     {
         parent::__construct();
 
-        $this->views = config('stubkit.views', [
-            'index', 'create', 'show', 'edit',
-        ]);
+        $this->views = config('stubkit.views.stubs', []);
     }
 
     /**
@@ -88,20 +86,17 @@ class ViewsMakeCommand extends Command
      */
     public function makeView(string $view)
     {
-//        $path = config('stubkit.views.path', 'js/Pages/{{model.studlyPlural}}/{{view.studly}}.vue');
-        $path = config('stubkit.view_path');
-
-        $values = [
-            'view' => $view,
-            'model' => Str::reset($this->argument('name'))
-        ];
-
         $syntax = (new Syntax())->make(
-            $values,
+            ['model' => Str::reset($this->argument('name'))],
             config('stubkit.variables.*', [])
         );
 
-        $path = $syntax->parse($path);
+        $syntax->make(
+            ['view' => $syntax->parse($view)],
+            config('stubkit.variables.*', [])
+        );
+
+        $path = $syntax->parse(config('stubkit.views.path'));
 
         if (file_exists(base_path("stubs/view.${view}.stub"))) {
             $stub = base_path("stubs/view.${view}.stub");
@@ -111,7 +106,7 @@ class ViewsMakeCommand extends Command
             $stub = false;
         }
 
-        $path = resource_path($path);
+        $path = base_path($path);
 
         $content = ($stub) ? file_get_contents($stub) : '';
 
