@@ -71,4 +71,19 @@ class MakeScaffoldTest extends TestCase
 
         $this->assertCount(8, StubKit::rendered());
     }
+
+    public function test_process_option_variables_take_priority()
+    {
+        mkdir(base_path('stubs'));
+
+        file_put_contents(base_path('stubs/routes.web.stub'), '{{model}}: {{medium}}');
+
+        config()->set(['stubkit.scaffolds.default' => [
+            'make:routes {{ scaffold.studly }} --medium=Post',
+        ]]);
+
+        $this->artisan('make:scaffold Content --medium=Video');
+
+        $this->assertEquals('Content: Post', file_get_contents(base_path('stubs/routes.web.stub')));
+    }
 }
