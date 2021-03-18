@@ -104,5 +104,9 @@ class StubKitProvider extends ServiceProvider
             __DIR__.'/../../stubs/request.stub' => base_path('stubs/request.stub'),
             __DIR__.'/../../stubs/test.stub' => base_path('stubs/test.stub'),
         ], 'stubkit-stub-overrides');
+
+        $this->publishes([
+            __DIR__.'/../../views' => resource_path('views/vendor/stubkit'),
+        ], 'stubkit-views');
     }
 }
