@@ -37,13 +37,14 @@ class InstallCommand extends Command
         $this->callSilent('stub:publish');
         $this->comment('Publishing StubKit Stubs...');
         $this->callSilent('vendor:publish', ['--tag' => 'stubkit-stubs']);
-        if(!$this->option('no-overrides')) {
+        if (! $this->option('no-overrides')) {
             $this->comment('Publishing StubKit Stub Overrides...');
             $this->callSilent('vendor:publish', [
                 '--tag' => 'stubkit-stub-overrides',
                 '--force' => true,
             ]);
         }
+
         return 1;
     }
 }

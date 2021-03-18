@@ -198,6 +198,6 @@ return [
    */
     'views' => [
         'path' => 'resources/views/{{model.slugPlural}}/{{view.slug}}.blade.php',
-        'stubs' => ['index', 'create', 'show', 'edit']
+        'stubs' => ['index', 'create', 'show', 'edit'],
     ],
 ];

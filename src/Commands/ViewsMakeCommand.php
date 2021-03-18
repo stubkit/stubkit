@@ -57,7 +57,7 @@ class ViewsMakeCommand extends Command
                 continue;
             }
 
-            if(! $this->makeView($view)) {
+            if (! $this->makeView($view)) {
                 return 1;
             }
         }
@@ -118,7 +118,7 @@ class ViewsMakeCommand extends Command
             return false;
         }
 
-        if(! is_dir($folder)) {
+        if (! is_dir($folder)) {
             mkdir($folder, 0777, true);
         }
 
