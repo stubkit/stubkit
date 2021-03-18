@@ -40,7 +40,7 @@ class Fields
         $output = '';
 
         $items = (new self(
-            config('stubkit-fields'),
+            config('stubkit-types'),
             config('stubkit-mappings'),
         ))->get($type, $fields);
 

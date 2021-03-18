@@ -31,8 +31,8 @@ class PackageTest extends TestCase
             ],
         ]);
 
-        $this->assertEquals('custom-string', config('stubkit-fields.string.custom'));
-        $this->assertEquals('custom-default', config('stubkit-fields.default.custom'));
+        $this->assertEquals('custom-string', config('stubkit-types.string.custom'));
+        $this->assertEquals('custom-default', config('stubkit-types.default.custom'));
     }
 
     public function test_package_adding_variable()

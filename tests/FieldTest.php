@@ -17,7 +17,7 @@ class FieldTest extends TestCase
 
     protected function setUp():void
     {
-        $this->fieldConfig = require __DIR__.'/../config/fields.php';
+        $this->fieldConfig = require __DIR__.'/../config/types.php';
         $this->mappingConfig = require __DIR__.'/../config/mappings.php';
 
         $this->fields = new fields(
