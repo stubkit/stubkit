@@ -1,4 +1,4 @@
-@include('stubkit::base.input', [
+@include('stubkit::form.input', [
     'attributes' => [
         'type' => 'tel',
         'value' => 'old.edit',

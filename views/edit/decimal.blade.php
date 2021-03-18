@@ -1,4 +1,4 @@
-@include('stubkit::base.input', [
+@include('stubkit::form.input', [
     'attributes' => [
         'type' => 'decimal',
         'steps' => '0.01',
