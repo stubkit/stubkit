@@ -31,19 +31,20 @@ class InstallCommand extends Command
         $this->comment('Publishing StubKit Views...');
         $this->callSilent('vendor:publish', ['--tag' => 'stubkit-config']);
         $this->callSilent('vendor:publish', ['--tag' => 'stubkit-mappings']);
-        $this->callSilent('vendor:publish', ['--tag' => 'stubkit-fields']);
+        $this->callSilent('vendor:publish', ['--tag' => 'stubkit-types']);
         $this->callSilent('vendor:publish', ['--tag' => 'stubkit-views']);
         $this->comment('Publishing Laravel Stubs...');
         $this->callSilent('stub:publish');
         $this->comment('Publishing StubKit Stubs...');
         $this->callSilent('vendor:publish', ['--tag' => 'stubkit-stubs']);
-        if(!$this->option('no-overrides')) {
+        if (! $this->option('no-overrides')) {
             $this->comment('Publishing StubKit Stub Overrides...');
             $this->callSilent('vendor:publish', [
                 '--tag' => 'stubkit-stub-overrides',
                 '--force' => true,
             ]);
         }
+
         return 1;
     }
 }

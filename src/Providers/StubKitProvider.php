@@ -36,7 +36,7 @@ class StubKitProvider extends ServiceProvider
 
         $this->app->bind(Fields::class, function () {
             return new Fields(
-                config('stubkit-fields'),
+                config('stubkit-types'),
                 config('stubkit-mappings'),
             );
         });
@@ -64,7 +64,7 @@ class StubKitProvider extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
 
         $this->mergeConfigFrom(__DIR__.'/../../config/stubkit.php', 'stubkit');
-        $this->mergeConfigFrom(__DIR__.'/../../config/fields.php', 'stubkit-fields');
+        $this->mergeConfigFrom(__DIR__.'/../../config/types.php', 'stubkit-types');
         $this->mergeConfigFrom(__DIR__.'/../../config/mappings.php', 'stubkit-mappings');
     }
 
@@ -80,8 +80,8 @@ class StubKitProvider extends ServiceProvider
         ], 'stubkit-config');
 
         $this->publishes([
-            __DIR__.'/../../config/fields.php' => config_path('stubkit-fields.php'),
-        ], 'stubkit-fields');
+            __DIR__.'/../../config/types.php' => config_path('stubkit-types.php'),
+        ], 'stubkit-types');
 
         $this->publishes([
             __DIR__.'/../../config/mappings.php' => config_path('stubkit-mappings.php'),

@@ -253,12 +253,12 @@ class StubKit
     public function addTypes(array $types = [])
     {
         $fields = new Fields(
-            config('stubkit-fields'),
+            config('stubkit-types'),
             config('stubkit-mappings'),
         );
 
         config()->set(
-            'stubkit-fields',
+            'stubkit-types',
             $fields->addTypes($types)
         );
     }

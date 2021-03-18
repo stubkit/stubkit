@@ -1,10 +1,14 @@
 @inject('helper', 'StubKit\Support\Fields')
 @php
-    if(isset($attributes['value']) && $attributes['value'] == 'old.create') {
+    if($field_type == 'create') {
         $attributes['value'] = stubkit("{{ old('{{ field.snake }}') }}", get_defined_vars());
     }
-    if(isset($attributes['value']) && $attributes['value'] == 'old.edit') {
+    if($field_type == 'edit') {
         $attributes['value'] = stubkit("{{ old('{{ field.snake }}', \${{ model.camel }}->{{ field.snake }}) }}", get_defined_vars());
+    }
+
+    if(isset($attributes['type']) && $attributes['type'] == 'file') {
+        unset($attributes['value']);
     }
 @endphp
 <div>

@@ -4,7 +4,6 @@ namespace StubKit\Tests;
 
 use Illuminate\Support\Str;
 use StubKit\Facades\StubKit;
-use StubKit\Support\Item;
 
 class MiscTest extends TestCase
 {
