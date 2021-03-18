@@ -108,7 +108,6 @@ class ScaffoldMakeCommand extends Command
                 $this->handleCommandWithNewProcess($command);
             } else {
                 $this->heading("php artisan ${command}");
-                usleep(config('stubkit.scaffold-delay', 250000));
                 $process = app(Kernel::class);
                 $process->call($command);
                 $output = $process->output();
@@ -117,7 +116,7 @@ class ScaffoldMakeCommand extends Command
             $output = $e->getMessage();
         }
 
-        $this->info(trim($output)."\n");
+        $this->info(trim($output));
 
         return $output;
     }
@@ -183,7 +182,7 @@ class ScaffoldMakeCommand extends Command
     public function heading(string $phrase)
     {
         $this->comment('----------------------------------------------------------');
-        $this->comment("| ${phrase}\n");
+        $this->comment("| ${phrase}");
         $this->comment('----------------------------------------------------------');
     }
 
