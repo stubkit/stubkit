@@ -2,6 +2,8 @@
 
 namespace StubKit\Support;
 
+use Illuminate\Support\Arr;
+
 class Syntax
 {
     /**
@@ -64,10 +66,11 @@ class Syntax
             return ! is_bool($value) && $value != '';
         });
 
+        $emptyCallback = function($value = null) { return $value; };
+
         foreach ($variables as $key => $value) {
             $variable = array_key_exists($key, $values) ? $values[$key] : '';
-
-            $this->variables[$key] = ['callback' => '', 'value' => $variable];
+            $this->variables[$key] = ['callback' => $emptyCallback, 'value' => $variable];
 
             if (is_array($value)) {
                 foreach ($value as $child => $callback) {
@@ -77,10 +80,17 @@ class Syntax
                     ];
                 }
             } else {
-                $this->variables[$key] = [
-                    'callback' => $value,
-                    'value' => $variable,
-                ];
+                if(is_callable($value)) {
+                    $this->variables[$key] = [
+                        'callback' => $value,
+                        'value' => $variable,
+                    ];
+                } else {
+                    $this->variables[$key] = [
+                        'callback' => $emptyCallback,
+                        'value' => $value,
+                    ];
+                }
             }
         }
 
@@ -90,7 +100,7 @@ class Syntax
             }
 
             $this->variables[$key] = [
-                'callback' => '',
+                'callback' => $emptyCallback,
                 'value' => $value,
             ];
 
@@ -127,6 +137,22 @@ class Syntax
     public function all()
     {
         return $this->variables;
+    }
+
+    /**
+     * Get single variable.
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public function get(string $key)
+    {
+        $variable = Arr::get($this->variables, $key, [
+            'value' => '',
+            'callback' => function() { return null; },
+        ]);
+
+        return $variable['callback']($variable['value']);
     }
 
     /**

@@ -146,4 +146,22 @@ class SyntaxTest extends TestCase
         $output = $syntax->parse(' {{ model.studly }} ');
         $this->assertEquals(' User ', $output);
     }
+
+    public function test_getting_single_variable()
+    {
+        $variables = [
+            'url' => 'google.com',
+            'user' => [
+                'upper' => function ($value) {
+                    return ucfirst($value);
+                },
+            ]
+        ];
+
+        $syntax = (new Syntax())->make(['user' => 'sara'], [], $variables);
+
+        $this->assertEquals('google.com', $syntax->get('url'));
+        $this->assertEquals('Sara', $syntax->get('user.upper'));
+        $this->assertEquals(null, $syntax->get('missing'));
+    }
 }
