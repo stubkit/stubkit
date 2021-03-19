@@ -53,6 +53,9 @@ class ScaffoldMakeCommand extends Command
     {
         $this->asciiHeader();
 
+        $this->callSilent('view:clear');
+        $this->callSilent('cache:clear');
+
         StubKit::setScaffold($this->argument('name'));
         StubKit::setFields($this->option('fields'));
 
