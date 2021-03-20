@@ -27,7 +27,7 @@ class MakeRoutesTest extends TestCase
             ''
         );
 
-        $this->artisan('make:routes User --api')
+        $this->artisan('make:routes User --type=api')
             ->expectsOutput('Routes created successfully.');
 
         $this->assertStringContainsString(
@@ -40,7 +40,7 @@ class MakeRoutesTest extends TestCase
     {
         file_put_contents(__DIR__.'/Fixtures/app/routes/api.php', "Route::get('users', 'UserController@index')->name('users.index');");
 
-        $this->artisan('make:routes User --api')
+        $this->artisan('make:routes User --type=api')
             ->expectsOutput('Routes already exists!')
             ->assertExitCode(1);
     }
