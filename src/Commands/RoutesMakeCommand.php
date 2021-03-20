@@ -14,7 +14,7 @@ class RoutesMakeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:routes {name} {--api}';
+    protected $signature = 'make:routes {name} {--type=web}';
 
     /**
      * The console command description.
@@ -30,22 +30,19 @@ class RoutesMakeCommand extends Command
      */
     public function handle()
     {
-        $path = 'routes/web.php';
-        $filename = 'routes.web.stub';
+        $type = $this->option('type');
+        $source = base_path("stubs/routes.$type.stub");
+        $destination = base_path("routes/$type.php");
 
-        if ($this->option('api')) {
-            $path = 'routes/api.php';
-            $filename = 'routes.api.stub';
+        if(!file_exists($source) && in_array($type, ['web', 'api'])) {
+            $source = __DIR__ ."/../../stubs/routes.$type.stub";
         }
 
-        $source = base_path("stubs/${filename}");
-
-        if (! file_exists(base_path("stubs/${filename}"))) {
-            $source = __DIR__."/../../stubs/${filename}";
-        }
+        abort_if(!file_exists($source), 500, "Missing stub file routes.$type.stub");
+        abort_if(!file_exists($destination), 500, "Missing routes file routes/$type.php");
 
         $content = file_get_contents($source);
-        $current = file_get_contents(base_path($path));
+        $current = file_get_contents($destination);
 
         $syntax = (new Syntax())->make(
             ['model' => $this->argument('name')],
@@ -64,9 +61,9 @@ class RoutesMakeCommand extends Command
 
         $content = rtrim($current)."\n\n${content}";
 
-        file_put_contents(base_path($path), $content);
+        file_put_contents($destination, $content);
 
-        StubKit::updated(base_path($path));
+        StubKit::updated($destination);
 
         $this->info('Routes created successfully.');
 
