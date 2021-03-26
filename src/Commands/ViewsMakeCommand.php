@@ -124,8 +124,6 @@ class ViewsMakeCommand extends Command
     {
         $views = Str::plural('view', count($this->views));
 
-        dd(count($this->views)." ${views} created successfully.");
-
         $this->info(count($this->views)." ${views} created successfully.");
     }
 }
