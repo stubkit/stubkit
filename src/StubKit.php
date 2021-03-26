@@ -8,6 +8,7 @@ use Illuminate\Support\Stringable;
 use PHPUnit\Framework\Assert;
 use StubKit\Support\Fields;
 use StubKit\Support\Item;
+use StubKit\Support\Scaffold;
 use StubKit\Support\Syntax;
 use Symfony\Component\Finder\Finder;
 
@@ -228,6 +229,11 @@ class StubKit
         $this->modified = now();
 
         return $this;
+    }
+
+    public function call($commands, $variables, $maker)
+    {
+        (new Scaffold($maker))->call($commands, $variables);
     }
 
     /**
