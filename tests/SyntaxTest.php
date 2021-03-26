@@ -24,7 +24,7 @@ class SyntaxTest extends TestCase
         $this->assertEquals('userAccount', $syntax->parse('{{ resource.camel}}'));
         $this->assertEquals('user-account', $syntax->parse('{{ resource.slug }}'));
         $this->assertEquals('user_account', $syntax->parse('{{ resource.snake }}'));
-        $this->assertEquals('user accounts', $syntax->parse('{{ resource.plural }}'));
+        $this->assertEquals('user accounts', $syntax->parse('{{ resource.lowerPlural }}'));
         $this->assertEquals('User Accounts', $syntax->parse('{{ resource.titlePlural }}'));
         $this->assertEquals('UserAccounts', $syntax->parse('{{ resource.studlyPlural }}'));
         $this->assertEquals('userAccounts', $syntax->parse('{{ resource.camelPlural }}'));
@@ -155,7 +155,7 @@ class SyntaxTest extends TestCase
                 'upper' => function ($value) {
                     return ucfirst($value);
                 },
-            ]
+            ],
         ];
 
         $syntax = (new Syntax())->make(['user' => 'sara'], [], $variables);
