@@ -30,6 +30,9 @@ class Scaffold
 
     public function call($commands, $variables = [])
     {
+        $this->maker->callSilent('view:clear');
+        $this->maker->callSilent('cache:clear');
+
         $this->syntax->make($variables, config('stubkit.variables.*', []));
 
         foreach ($commands as $command) {
