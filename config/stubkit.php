@@ -79,7 +79,7 @@ return [
                 return Str::reset($value)->snake();
             },
 
-            'plural' => function ($value) {
+            'lowerPlural' => function ($value) {
                 return Str::reset($value)->plural();
             },
 
