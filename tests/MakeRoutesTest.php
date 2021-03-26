@@ -44,4 +44,32 @@ class MakeRoutesTest extends TestCase
             ->expectsOutput('Routes already exists!')
             ->assertExitCode(1);
     }
+
+    public function test_using_option_to()
+    {
+        file_put_contents(__DIR__.'/Fixtures/app/routes/custom.php', '');
+
+        $this->artisan('make:routes User --to=custom')
+            ->assertExitCode(0);
+
+        $this->assertStringContainsString(
+            'UserController',
+            file_get_contents(__DIR__.'/Fixtures/app/routes/custom.php')
+        );
+    }
+
+    public function test_using_option_stub()
+    {
+        mkdir(__DIR__.'/Fixtures/app/stubs/');
+
+        file_put_contents(__DIR__.'/Fixtures/app/stubs/routes.custom.stub', '{{model.title}} works');
+
+        $this->artisan('make:routes User --stub=custom')
+            ->assertExitCode(0);
+
+        $this->assertStringContainsString(
+            'User works',
+            file_get_contents(__DIR__.'/Fixtures/app/routes/web.php')
+        );
+    }
 }
