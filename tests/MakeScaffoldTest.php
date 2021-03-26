@@ -4,6 +4,7 @@ namespace StubKit\Tests;
 
 use StubKit\Commands\ScaffoldMakeCommand;
 use StubKit\Facades\StubKit;
+use StubKit\Support\Scaffold;
 
 class MakeScaffoldTest extends TestCase
 {
@@ -40,7 +41,7 @@ class MakeScaffoldTest extends TestCase
 
     public function test_migration_exception_handling()
     {
-        $make = new ScaffoldMakeCommand();
+        $make = new Scaffold(new ScaffoldMakeCommand());
 
         $this->assertEquals(
             "Table already exists!\n",
