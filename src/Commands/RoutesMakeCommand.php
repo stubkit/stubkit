@@ -14,7 +14,7 @@ class RoutesMakeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:routes {name} {--type=web}';
+    protected $signature = 'make:routes {name} {--type=web} {--stub=} {--to=}';
 
     /**
      * The console command description.
@@ -30,16 +30,26 @@ class RoutesMakeCommand extends Command
      */
     public function handle()
     {
-        $type = $this->option('type');
-        $source = base_path("stubs/routes.$type.stub");
-        $destination = base_path("routes/$type.php");
+        $to = $this->option('type');
+        $stub = $this->option('type');
 
-        if(!file_exists($source) && in_array($type, ['web', 'api'])) {
-            $source = __DIR__ ."/../../stubs/routes.$type.stub";
+        if($this->option('to')) {
+            $to = $this->option('to');
         }
 
-        abort_if(!file_exists($source), 500, "Missing stub file routes.$type.stub");
-        abort_if(!file_exists($destination), 500, "Missing routes file routes/$type.php");
+        if($this->option('stub')) {
+            $stub = $this->option('stub');
+        }
+
+        $source = base_path("stubs/routes.{$stub}.stub");
+        $destination = base_path("routes/{$to}.php");
+
+        if (! file_exists($source) && in_array($stub, ['web', 'api'])) {
+            $source = __DIR__."/../../stubs/routes.{$stub}.stub";
+        }
+
+        abort_if(! file_exists($source), 500, "Missing stub file routes.{$stub}.stub");
+        abort_if(! file_exists($destination), 500, "Missing routes file routes/{$to}.php");
 
         $content = file_get_contents($source);
         $current = file_get_contents($destination);
