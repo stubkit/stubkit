@@ -33,17 +33,17 @@ class MakeViewsTest extends TestCase
         $this->assertStringContainsString('{{ $page->published_at->diffForHumans() }}', $view);
     }
 
-    public function test_make_views_with_file_flag()
+    public function test_make_views_with_view_flag()
     {
         $this->assertFileDoesNotExist(
             __DIR__.'/Fixtures/app/resources/views/users/index.blade.php'
         );
 
-        $this->artisan('make:views User --index')
-            ->expectsOutput('1 view created successfully.');
+        $this->artisan('make:views User --view=index --view=show')
+            ->expectsOutput('2 views created successfully.');
 
         $this->assertFileExists(__DIR__.'/Fixtures/app/resources/views/users/index.blade.php');
-        $this->assertFileDoesNotExist(__DIR__.'/Fixtures/app/resources/views/users/show.blade.php');
+        $this->assertFileExists(__DIR__.'/Fixtures/app/resources/views/users/show.blade.php');
         $this->assertFileDoesNotExist(__DIR__.'/Fixtures/app/resources/views/users/create.blade.php');
         $this->assertFileDoesNotExist(__DIR__.'/Fixtures/app/resources/views/users/edit.blade.php');
     }
