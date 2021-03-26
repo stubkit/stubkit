@@ -66,7 +66,9 @@ class Syntax
             return ! is_bool($value) && $value != '';
         });
 
-        $emptyCallback = function($value = null) { return $value; };
+        $emptyCallback = function ($value = null) {
+            return $value;
+        };
 
         foreach ($variables as $key => $value) {
             $variable = array_key_exists($key, $values) ? $values[$key] : '';
@@ -80,7 +82,7 @@ class Syntax
                     ];
                 }
             } else {
-                if(is_callable($value)) {
+                if (is_callable($value)) {
                     $this->variables[$key] = [
                         'callback' => $value,
                         'value' => $variable,
@@ -149,7 +151,9 @@ class Syntax
     {
         $variable = Arr::get($this->variables, $key, [
             'value' => '',
-            'callback' => function() { return null; },
+            'callback' => function () {
+                return null;
+            },
         ]);
 
         return $variable['callback']($variable['value']);
