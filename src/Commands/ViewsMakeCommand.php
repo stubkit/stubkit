@@ -112,7 +112,7 @@ class ViewsMakeCommand extends Command
             mkdir($folder, 0777, true);
         }
 
-        return file_put_contents($path, $content);
+        return file_put_contents($path, $content) !== false;
     }
 
     /**

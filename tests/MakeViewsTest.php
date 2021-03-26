@@ -69,4 +69,14 @@ class MakeViewsTest extends TestCase
 
         $this->assertFileExists(base_path('resources/js/Pages/Users/CreateUserForm.vue'));
     }
+
+    public function test_view_stubs_has_config_and_missing_actual_stub()
+    {
+        config()->set('stubkit.views.stubs', ['create-{{model.studly}}-form']);
+
+        $this->artisan('make:views User');
+
+        $this->assertFileExists(base_path('resources/views/users/create-user-form.blade.php'));
+        $this->assertEquals('', file_get_contents(base_path('resources/views/users/create-user-form.blade.php')));
+    }
 }
