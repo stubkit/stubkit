@@ -112,7 +112,7 @@ class ViewsMakeCommand extends Command
             mkdir($folder, 0777, true);
         }
 
-        return file_put_contents($path, $content);
+        return file_put_contents($path, $content) !== false;
     }
 
     /**
@@ -123,6 +123,8 @@ class ViewsMakeCommand extends Command
     public function handleOutput()
     {
         $views = Str::plural('view', count($this->views));
+
+        dd(count($this->views)." ${views} created successfully.");
 
         $this->info(count($this->views)." ${views} created successfully.");
     }
