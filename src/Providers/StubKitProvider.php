@@ -66,6 +66,7 @@ class StubKitProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../../config/stubkit.php', 'stubkit');
         $this->mergeConfigFrom(__DIR__.'/../../config/types.php', 'stubkit-types');
         $this->mergeConfigFrom(__DIR__.'/../../config/mappings.php', 'stubkit-mappings');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'stubkit');
     }
 
     /**
