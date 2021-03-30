@@ -1,3 +1,4 @@
+@inject('helper', 'StubKit\Support\Fields')
 @php
     if($field_type == 'create') {
         $value = stubkit("{{ old('{{ field.snake }}') }}", get_defined_vars());

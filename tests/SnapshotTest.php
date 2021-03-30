@@ -22,9 +22,8 @@ class SnapshotTest extends TestCase
         StubKit::syntax(['model' => 'Post']);
 
         StubKit::assertRender(function () {
-            return view('stubkit::index', [
-                'fields' => 'id,first_name,last_name,created_at',
-            ]);
+            $callback = config('stubkit.variables.fields.index');
+            return $callback('id,first_name,last_name,created_at');
         }, base_path('snapshots/index.blade.php'));
     }
 
@@ -33,9 +32,8 @@ class SnapshotTest extends TestCase
         StubKit::syntax(['model' => 'Post']);
 
         StubKit::assertRender(function () {
-            return view('stubkit::show', [
-                'fields' => 'id,first_name,last_name',
-            ]);
+            $callback = config('stubkit.variables.fields.show');
+            return $callback('id,first_name,last_name');
         }, base_path('snapshots/show.blade.php'));
     }
 
@@ -44,9 +42,8 @@ class SnapshotTest extends TestCase
         StubKit::syntax(['model' => 'TeamMember']);
 
         StubKit::assertRender(function () {
-            return view('stubkit::create', [
-                'fields' => 'avatar,first_name,bio',
-            ]);
+            $callback = config('stubkit.variables.fields.create');
+            return $callback('avatar,first_name,bio');
         }, base_path('snapshots/create.blade.php'));
     }
 
@@ -55,9 +52,8 @@ class SnapshotTest extends TestCase
         StubKit::syntax(['model' => 'TeamMember']);
 
         StubKit::assertRender(function () {
-            return view('stubkit::edit', [
-                'fields' => 'avatar,first_name,bio',
-            ]);
+            $callback = config('stubkit.variables.fields.edit');
+            return $callback('avatar,first_name,bio');
         }, base_path('snapshots/edit.blade.php'));
     }
 
@@ -66,9 +62,8 @@ class SnapshotTest extends TestCase
         StubKit::syntax(['model' => 'Post']);
 
         StubKit::assertRender(function () {
-            return view('stubkit::faker', [
-                'fields' => 'file,description,size',
-            ]);
+            $callback = config('stubkit.variables.fields.faker');
+            return $callback('file,description,size');
         }, base_path('snapshots/faker.blade.php'));
     }
 
@@ -77,9 +72,8 @@ class SnapshotTest extends TestCase
         StubKit::syntax(['model' => 'Post']);
 
         StubKit::assertRender(function () {
-            return view('stubkit::rules', [
-                'fields' => 'file,description,size',
-            ]);
+            $callback = config('stubkit.variables.fields.rules');
+            return $callback('file,description,size');
         }, base_path('snapshots/rules.blade.php'));
     }
 
@@ -88,9 +82,8 @@ class SnapshotTest extends TestCase
         StubKit::syntax(['model' => 'Post']);
 
         StubKit::assertRender(function () {
-            return view('stubkit::schema', [
-                'fields' => 'file,description,size',
-            ]);
+            $callback = config('stubkit.variables.fields.schema');
+            return $callback('file,description,size');
         }, base_path('snapshots/schema.blade.php'));
     }
 

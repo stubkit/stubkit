@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
+use StubKit\Facades\Fields;
 
 return [
 
@@ -41,6 +42,10 @@ return [
             'db:seed --class={{ scaffold.studly }}Seeder',
             'test --filter={{ scaffold.studly }}Test',
         ],
+
+        'pivot' => [
+            //
+        ]
 
     ],
 
@@ -114,26 +119,30 @@ return [
         ],
 
         'fields' => [
-            'schema' => function ($value) {
-                return view('stubkit::schema')->with(['fields' => $value]);
+            'schema' => function ($fields) {
+                return Fields::render('schema', $fields);
             },
-            'faker' => function ($value) {
-                return view('stubkit::faker')->with(['fields' => $value]);
+            'faker' => function ($fields) {
+                return Fields::render('faker', $fields);
             },
-            'rules' => function ($value) {
-                return view('stubkit::rules')->with(['fields' => $value]);
+            'rules' => function ($fields) {
+                return Fields::render('rules', $fields);
             },
-            'index' => function ($value) {
-                return view('stubkit::index')->with(['fields' => $value]);
+            'index' => function ($fields) {
+                return Fields::render('index', $fields);
             },
-            'show' => function ($value) {
-                return view('stubkit::show')->with(['fields' => $value]);
+            'show' => function ($fields) {
+                return Fields::render('show', $fields);
             },
-            'create' => function ($value) {
-                return view('stubkit::create')->with(['fields' => $value]);
+            'create' => function ($fields) {
+                return Fields::render('create', $fields);
             },
-            'edit' => function ($value) {
-                return view('stubkit::edit')->with(['fields' => $value]);
+            'edit' => function ($fields) {
+                return Fields::render('edit', $fields);
+            },
+            'headings' => function ($fields) {
+                return view('stubkit::formats.headings')
+                    ->with(['fields' => $fields]);
             },
         ],
     ],
