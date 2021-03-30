@@ -4,6 +4,7 @@ namespace StubKit\Tests;
 
 use Illuminate\Support\Str;
 use StubKit\Facades\StubKit;
+use StubKit\Support\Fields;
 
 class MiscTest extends TestCase
 {
@@ -108,5 +109,11 @@ class MiscTest extends TestCase
 
         unlink("${location}/test.txt");
         unlink("${basepath}/${excluded}/test.txt");
+    }
+
+    public function test_fields_rendering_unknown_type()
+    {
+        $this->assertEmpty((new Fields())->render('unknown-type', 'created_at'));
+        $this->assertNotEmpty((new Fields())->render('rules', 'created_at') );
     }
 }
