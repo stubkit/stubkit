@@ -3,5 +3,20 @@
 </h1>
 
 <div>
-    {{ fields.index }}
+    <table>
+        <tr>
+            {{ fields.headings }}
+            <th></th>
+        </tr>
+        @foreach(${{ model.camelPlural }} as ${{ model.camel }})
+        <tr>
+            {{ fields.index }}
+            <td>
+                <a href="{{ route('{{ model.slugPlural }}.show', ${{ model.camel }}) }}">
+                    View
+                </a>
+            </td>
+        </tr>
+        @endforeach
+    </table>
 </div>

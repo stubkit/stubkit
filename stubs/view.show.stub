@@ -6,7 +6,9 @@
 </h1>
 
 <div>
-    {{ fields.show }}
+    <table>
+        {{ fields.show }}
+    </table>
 
     <a href="{{ route('{{ model.slugPlural }}.edit', ${{ model.camel }}) }}">
         Edit
