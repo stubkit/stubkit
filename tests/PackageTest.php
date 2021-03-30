@@ -56,7 +56,7 @@ class PackageTest extends TestCase
 
     public function test_field_render_helper()
     {
-        $rendered = Fields::render('rules', 'name,email');
+        $rendered = (new Fields())->render('rules', 'name,email');
 
         $this->assertEquals("'name' => 'required',\n'email' => 'required|email',\n", $rendered);
     }

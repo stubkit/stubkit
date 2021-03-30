@@ -22,11 +22,11 @@ class Fields
      * @param array $fields
      * @param array $mappings
      */
-    public function __construct(array $fields, array $mappings)
+    public function __construct(array $fields = [], array $mappings = [])
     {
-        $this->fields = $fields;
+        $this->fields = empty($fields) ? config('stubkit-types') : $fields;
 
-        $this->mappings = $mappings;
+        $this->mappings = empty($mappings) ? config('stubkit-mappings') : $mappings;
     }
 
     /**
@@ -35,14 +35,11 @@ class Fields
      * @param string $fields
      * @return string
      */
-    public static function render(string $type, string $fields)
+    public function render(string $type, string $fields)
     {
         $output = '';
 
-        $items = (new self(
-            config('stubkit-types'),
-            config('stubkit-mappings'),
-        ))->get($type, $fields);
+        $items = $this->get($type, $fields);
 
         foreach ($items as $item) {
             $output .= view($item->view())->with($item->data())->render();
@@ -144,7 +141,7 @@ class Fields
     {
         $mappings = $this->views($field);
 
-        return $mappings[$type];
+        return Arr::get($mappings, $type, 'stubkit::none');
     }
 
     /**
