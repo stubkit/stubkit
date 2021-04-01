@@ -1,3 +1,3 @@
-'file' => 'sometimes|file',
+'file' => 'required|file',
 'description' => 'required',
 'size' => 'required|numeric',

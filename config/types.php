@@ -97,10 +97,20 @@ return [
         'schema' => 'stubkit::schema.string',
         'faker' => 'stubkit::faker.file',
         'rules' => 'stubkit::rules.file',
-        'index' => 'stubkit::index.image',
-        'show' => 'stubkit::show.image',
+        'index' => 'stubkit::index.text',
+        'show' => 'stubkit::show.text',
         'create' => 'stubkit::create.file',
         'edit' => 'stubkit::edit.file',
+    ],
+
+    'image' => [
+        'schema' => 'stubkit::schema.string',
+        'faker' => 'stubkit::faker.image',
+        'rules' => 'stubkit::rules.image',
+        'index' => 'stubkit::index.image',
+        'show' => 'stubkit::show.image',
+        'create' => 'stubkit::create.image',
+        'edit' => 'stubkit::edit.image',
     ],
 
     'foreign' => [
