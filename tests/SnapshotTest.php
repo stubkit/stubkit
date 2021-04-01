@@ -102,4 +102,14 @@ class SnapshotTest extends TestCase
 
         unlink($view);
     }
+
+    public function test_include_snapshot()
+    {
+        StubKit::syntax(['model' => 'Post']);
+
+        StubKit::assertRender(function () {
+            $callback = config('stubkit.variables.fields.index');
+            return $callback('user_id');
+        }, base_path('snapshots/include.blade.php'));
+    }
 }
