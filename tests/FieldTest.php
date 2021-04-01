@@ -135,6 +135,7 @@ class FieldTest extends TestCase
             'rules' => 'stubkit::rules.date',
             'index' => 'stubkit::index.timestamp',
             'show' => 'stubkit::show.timestamp',
+            'casts' => 'stubkit::casts.datetime',
         ], $this->fields->views('created_at'));
     }
 

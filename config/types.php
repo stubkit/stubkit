@@ -90,6 +90,7 @@ return [
         'show' => 'stubkit::show.timestamp',
         'create' => 'stubkit::create.datetime',
         'edit' => 'stubkit::edit.datetime',
+        'casts' => 'stubkit::casts.datetime',
     ],
 
     'file' => [
