@@ -1,0 +1,1 @@
+@include('stubkit::edit.number')
