@@ -144,11 +144,11 @@ class FieldTest extends TestCase
         $this->assertEquals([
             'schema' => 'stubkit::schema.foreign',
             'faker' => 'stubkit::faker.foreign',
-            'create' => 'stubkit::create.number',
-            'edit' => 'stubkit::edit.number',
+            'create' => 'stubkit::create.foreign',
+            'edit' => 'stubkit::edit.foreign',
             'rules' => 'stubkit::rules.foreign',
-            'index' => 'stubkit::index.text',
-            'show' => 'stubkit::show.text',
+            'index' => 'stubkit::index.foreign',
+            'show' => 'stubkit::show.foreign',
         ], $this->fields->views('user_id'));
     }
 
