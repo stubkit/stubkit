@@ -1,6 +1,6 @@
 @include('stubkit::form.input', [
     'attributes' => [
-        'type' => 'decimal',
+        'type' => 'number',
         'steps' => '0.01',
     ]
 ])
