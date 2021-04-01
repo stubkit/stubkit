@@ -229,11 +229,12 @@ class FieldTest extends TestCase
                     ->replace('stubkit::', '')
                     ->replace('.', DIRECTORY_SEPARATOR);
 
-                $this->assertTrue(file_exists(__DIR__."/../views/${view}.blade.php"));
 
                 if (! file_exists(__DIR__."/../views/${view}.blade.php")) {
                     throw new Exception("${view} doesnt exist. definition: ${definition}");
                 }
+
+                $this->assertTrue(file_exists(__DIR__."/../views/${view}.blade.php"));
             }
         }
     }
