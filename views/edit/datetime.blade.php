@@ -1,5 +1,5 @@
 @include('stubkit::form.input', [
     'attributes' => [
-        'type' => 'datetime',
+        'type' => 'datetime-local',
     ]
 ])
