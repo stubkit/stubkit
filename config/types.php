@@ -117,10 +117,10 @@ return [
         'schema' => 'stubkit::schema.foreign',
         'faker' => 'stubkit::faker.foreign',
         'rules' => 'stubkit::rules.foreign',
-        'index' => 'stubkit::index.text',
-        'show' => 'stubkit::show.text',
-        'create' => 'stubkit::create.number',
-        'edit' => 'stubkit::edit.number',
+        'index' => 'stubkit::index.foreign',
+        'show' => 'stubkit::show.foreign',
+        'create' => 'stubkit::create.foreign',
+        'edit' => 'stubkit::edit.foreign',
     ],
 
     'uuid' => [
