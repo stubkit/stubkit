@@ -1,1 +1,1 @@
-'{{ $field->snake() }}' => 'sometimes|file',
+'{{ $field->snake() }}' => 'required|file',
