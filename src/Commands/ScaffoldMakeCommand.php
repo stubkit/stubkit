@@ -59,8 +59,9 @@ class ScaffoldMakeCommand extends Command
 
         $this->shortcut = $this->getShortcut();
 
-        if(! is_null(optional($this->shortcut)->error)) {
+        if (! is_null(optional($this->shortcut)->error)) {
             $this->error($this->shortcut->error);
+
             return 1;
         }
 
@@ -86,7 +87,7 @@ class ScaffoldMakeCommand extends Command
             'scaffold' => $scaffold,
         ];
 
-        if($this->shortcut) {
+        if ($this->shortcut) {
             $values = array_merge($values, $this->shortcut->values);
         }
 
@@ -104,8 +105,8 @@ class ScaffoldMakeCommand extends Command
     {
         if ($type = $this->option('type')) {
             return config("stubkit.scaffolds.{$type}", []);
-        } elseif($type = optional($this->shortcut)->type) {
-            return config("stubkit.scaffolds.$type", []);
+        } elseif ($type = optional($this->shortcut)->type) {
+            return config("stubkit.scaffolds.${type}", []);
         } else {
             return config('stubkit.scaffolds.default', []);
         }
@@ -117,7 +118,7 @@ class ScaffoldMakeCommand extends Command
             Pivot::class => $this->option('pivot'),
         ])));
 
-        if(!$shortcut) {
+        if (! $shortcut) {
             return null;
         }
 

@@ -22,7 +22,7 @@ class Pivot extends Shortcut
     {
         $pivot = array_map('trim', explode(',', $pivot));
 
-        if(count($pivot) !== 2) {
+        if (count($pivot) !== 2) {
             $this->error = 'Pivots require two comma separated models.';
 
             return;
@@ -44,11 +44,11 @@ class Pivot extends Shortcut
      */
     public function addFields($fields = null)
     {
-        $columns = Str::reset($this->values['parent'])->snake() .'_id, ';
-        $columns .= Str::reset($this->values['child'])->snake() .'_id';
+        $columns = Str::reset($this->values['parent'])->snake().'_id, ';
+        $columns .= Str::reset($this->values['child'])->snake().'_id';
 
-        if($fields) {
-            $columns = $columns . ', ' . $fields;
+        if ($fields) {
+            $columns = $columns.', '.$fields;
         }
 
         return $columns;

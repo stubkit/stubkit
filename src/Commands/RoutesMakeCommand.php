@@ -33,11 +33,11 @@ class RoutesMakeCommand extends Command
         $to = $this->option('type');
         $stub = $this->option('type');
 
-        if($this->option('to')) {
+        if ($this->option('to')) {
             $to = $this->option('to');
         }
 
-        if($this->option('stub')) {
+        if ($this->option('stub')) {
             $stub = $this->option('stub');
         }
 

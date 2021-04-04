@@ -3,7 +3,6 @@
 namespace StubKit\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use StubKit\Support\Syntax;
 
@@ -49,7 +48,7 @@ class ViewsMakeCommand extends Command
      */
     public function handle()
     {
-        if($this->option('type')) {
+        if ($this->option('type')) {
             $this->views = $this->option('type');
         }
 

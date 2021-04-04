@@ -5,7 +5,7 @@ namespace StubKit\Shortcuts;
 abstract class Shortcut
 {
     /**
-     * The current scaffold;
+     * The current scaffold;.
      * @var
      */
     public $scaffold;
@@ -41,7 +41,7 @@ abstract class Shortcut
     }
 
     /**
-     * Set the scaffold
+     * Set the scaffold.
      * @param $scaffold
      * @return $this
      */
@@ -52,4 +52,3 @@ abstract class Shortcut
         return $this;
     }
 }
-

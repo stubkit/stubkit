@@ -48,7 +48,7 @@ return [
             'make:controller {{model.studly}}Controller --type=pivot',
             'make:routes {{model.studly}} --type=pivot --to=web',
             'make:migration create_{{parent.snake}}_{{child.snake}}_table',
-        ]
+        ],
 
     ],
 

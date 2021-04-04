@@ -23,6 +23,7 @@ class SnapshotTest extends TestCase
 
         StubKit::assertRender(function () {
             $callback = config('stubkit.variables.fields.index');
+
             return $callback('id,first_name,last_name,created_at');
         }, base_path('snapshots/index.blade.php'));
     }
@@ -33,6 +34,7 @@ class SnapshotTest extends TestCase
 
         StubKit::assertRender(function () {
             $callback = config('stubkit.variables.fields.show');
+
             return $callback('id,first_name,last_name');
         }, base_path('snapshots/show.blade.php'));
     }
@@ -43,6 +45,7 @@ class SnapshotTest extends TestCase
 
         StubKit::assertRender(function () {
             $callback = config('stubkit.variables.fields.create');
+
             return $callback('avatar,first_name,bio');
         }, base_path('snapshots/create.blade.php'));
     }
@@ -53,6 +56,7 @@ class SnapshotTest extends TestCase
 
         StubKit::assertRender(function () {
             $callback = config('stubkit.variables.fields.edit');
+
             return $callback('avatar,first_name,bio');
         }, base_path('snapshots/edit.blade.php'));
     }
@@ -63,6 +67,7 @@ class SnapshotTest extends TestCase
 
         StubKit::assertRender(function () {
             $callback = config('stubkit.variables.fields.faker');
+
             return $callback('file,description,size');
         }, base_path('snapshots/faker.blade.php'));
     }
@@ -73,6 +78,7 @@ class SnapshotTest extends TestCase
 
         StubKit::assertRender(function () {
             $callback = config('stubkit.variables.fields.rules');
+
             return $callback('file,description,size');
         }, base_path('snapshots/rules.blade.php'));
     }
@@ -83,6 +89,7 @@ class SnapshotTest extends TestCase
 
         StubKit::assertRender(function () {
             $callback = config('stubkit.variables.fields.schema');
+
             return $callback('file,description,size');
         }, base_path('snapshots/schema.blade.php'));
     }
@@ -109,6 +116,7 @@ class SnapshotTest extends TestCase
 
         StubKit::assertRender(function () {
             $callback = config('stubkit.variables.fields.index');
+
             return $callback('user_id');
         }, base_path('snapshots/include.blade.php'));
     }

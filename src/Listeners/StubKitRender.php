@@ -30,7 +30,7 @@ class StubKitRender
     {
         $values = array_filter($event->input->getOptions());
 
-        if($shortcut = StubKit::shortcut()) {
+        if ($shortcut = StubKit::shortcut()) {
             $values = array_merge($values, $shortcut->values);
         }
 

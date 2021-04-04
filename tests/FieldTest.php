@@ -229,7 +229,6 @@ class FieldTest extends TestCase
                     ->replace('stubkit::', '')
                     ->replace('.', DIRECTORY_SEPARATOR);
 
-
                 if (! file_exists(__DIR__."/../views/${view}.blade.php")) {
                     throw new Exception("${view} doesnt exist. definition: ${definition}");
                 }
