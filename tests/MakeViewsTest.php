@@ -39,7 +39,7 @@ class MakeViewsTest extends TestCase
             __DIR__.'/Fixtures/app/resources/views/users/index.blade.php'
         );
 
-        $this->artisan('make:views User --view=index --view=show')
+        $this->artisan('make:views User --type=index --type=show')
             ->expectsOutput('2 views created successfully.');
 
         $this->assertFileExists(__DIR__.'/Fixtures/app/resources/views/users/index.blade.php');

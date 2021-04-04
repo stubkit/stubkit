@@ -14,7 +14,7 @@ class ViewsMakeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:views {name} {--view=*}';
+    protected $signature = 'make:views {name} {--type=*}';
 
     /**
      * The console command description.
@@ -49,14 +49,11 @@ class ViewsMakeCommand extends Command
      */
     public function handle()
     {
-        $all = count($this->option('view')) === 0;
+        if($this->option('type')) {
+            $this->views = $this->option('type');
+        }
 
-        foreach ($this->views as $index => $view) {
-            if (! $all && ! in_array($view, $this->option('view'))) {
-                unset($this->views[$index]);
-                continue;
-            }
-
+        foreach ($this->views as $view) {
             if (! $this->makeView($view)) {
                 return 1;
             }
