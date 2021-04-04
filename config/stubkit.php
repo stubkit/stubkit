@@ -45,9 +45,18 @@ return [
 
         'pivot' => [
             'make:model {{model.studly}}',
-            'make:controller {{model.studly}}Controller --type=pivot',
             'make:routes {{model.studly}} --type=pivot --to=web',
+            'make:controller {{model.studly}}Controller --type=pivot',
             'make:migration create_{{parent.snake}}_{{child.snake}}_table',
+        ],
+
+        'nested' => [
+            'make:model {{model.studly}}',
+            'make:request Create{{ scaffold.studly }}Request',
+            'make:request Update{{ scaffold.studly }}Request',
+            'make:controller {{scaffold.studly}}Controller --type=nested',
+            'make:routes {{scaffold.studly}} --type=nested --to=web',
+            'make:migration create_{{scaffold.snakePlural}}_table',
         ],
 
     ],

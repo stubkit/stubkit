@@ -5,6 +5,7 @@ namespace StubKit\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use StubKit\Facades\StubKit;
+use StubKit\Shortcuts\Nested;
 use StubKit\Shortcuts\Pivot;
 use StubKit\Support\Syntax;
 
@@ -15,7 +16,7 @@ class ScaffoldMakeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:scaffold {name} {--type=} {--fields=} {--pivot=}';
+    protected $signature = 'make:scaffold {name} {--type=} {--fields=} {--pivot=} {--nested=}';
 
     /**
      * The console command description.
@@ -116,6 +117,7 @@ class ScaffoldMakeCommand extends Command
     {
         $shortcut = Arr::first(array_keys(array_filter([
             Pivot::class => $this->option('pivot'),
+            Nested::class => $this->option('nested'),
         ])));
 
         if (! $shortcut) {
