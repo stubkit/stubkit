@@ -36,6 +36,13 @@ class StubKit
     public $fields;
 
     /**
+     * The shortcut being scaffolded.
+     *
+     * @var mixed
+     */
+    public $shortcut;
+
+    /**
      * The syntax used to render.
      *
      * @var Syntax
@@ -298,6 +305,25 @@ class StubKit
     public function setScaffold($name)
     {
         $this->scaffolding = $name;
+    }
+
+    /**
+     * Set the shortcut.
+     * @param mixed $shortcut
+     * @return void
+     */
+    public function setShortcut($shortcut)
+    {
+        $this->shortcut = $shortcut;
+    }
+
+    /**
+     * Get the shortcut.
+     * @return mixed
+     */
+    public function shortcut()
+    {
+        return $this->shortcut;
     }
 
     /**

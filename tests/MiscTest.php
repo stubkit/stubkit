@@ -114,6 +114,6 @@ class MiscTest extends TestCase
     public function test_fields_rendering_unknown_type()
     {
         $this->assertEmpty((new Fields())->render('unknown-type', 'created_at'));
-        $this->assertNotEmpty((new Fields())->render('rules', 'created_at') );
+        $this->assertNotEmpty((new Fields())->render('rules', 'created_at'));
     }
 }

@@ -3,7 +3,9 @@
 namespace StubKit\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
 use StubKit\Facades\StubKit;
+use StubKit\Shortcuts\Pivot;
 use StubKit\Support\Syntax;
 
 class ScaffoldMakeCommand extends Command
@@ -13,7 +15,7 @@ class ScaffoldMakeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:scaffold {name} {--type=} {--fields=}';
+    protected $signature = 'make:scaffold {name} {--type=} {--fields=} {--pivot=}';
 
     /**
      * The console command description.
@@ -28,6 +30,13 @@ class ScaffoldMakeCommand extends Command
      * @var Syntax
      */
     public $syntax;
+
+    /**
+     * StubKit Shortcut Instance.
+     *
+     * @var mixed
+     */
+    public $shortcut;
 
     /**
      * Construct the command.
@@ -48,8 +57,23 @@ class ScaffoldMakeCommand extends Command
     {
         $this->asciiHeader();
 
-        StubKit::setScaffold($this->argument('name'));
-        StubKit::setFields($this->option('fields'));
+        $this->shortcut = $this->getShortcut();
+
+        if (! is_null(optional($this->shortcut)->error)) {
+            $this->error($this->shortcut->error);
+
+            return 1;
+        }
+
+        $fields = is_null($this->shortcut)
+            ? $this->option('fields')
+            : $this->shortcut->fields;
+
+        $scaffold = $this->argument('name');
+
+        StubKit::setScaffold($scaffold);
+        StubKit::setShortcut($this->shortcut);
+        StubKit::setFields($fields);
 
         $commands = $this->getCommands();
 
@@ -59,9 +83,15 @@ class ScaffoldMakeCommand extends Command
             return 1;
         }
 
-        StubKit::call($commands, [
-            'scaffold' => $this->argument('name'),
-        ], $this);
+        $values = [
+            'scaffold' => $scaffold,
+        ];
+
+        if ($this->shortcut) {
+            $values = array_merge($values, $this->shortcut->values);
+        }
+
+        StubKit::call($commands, $values, $this);
 
         return 0;
     }
@@ -75,9 +105,35 @@ class ScaffoldMakeCommand extends Command
     {
         if ($type = $this->option('type')) {
             return config("stubkit.scaffolds.{$type}", []);
+        } elseif ($type = optional($this->shortcut)->type) {
+            return config("stubkit.scaffolds.${type}", []);
         } else {
             return config('stubkit.scaffolds.default', []);
         }
+    }
+
+    public function getShortcut()
+    {
+        $shortcut = Arr::first(array_keys(array_filter([
+            Pivot::class => $this->option('pivot'),
+        ])));
+
+        if (! $shortcut) {
+            return null;
+        }
+
+        $shortcut = app($shortcut);
+
+        $shortcut->settings(
+            $this->argument('name')
+        );
+
+        $shortcut->make(
+            $this->option($shortcut->type),
+            $this->option('fields')
+        );
+
+        return $shortcut;
     }
 
     public function asciiHeader()
