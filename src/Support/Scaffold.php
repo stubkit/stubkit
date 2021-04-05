@@ -66,7 +66,6 @@ class Scaffold
         if(!is_dir(storage_path('logs'))) {
             mkdir(storage_path('logs'), 0777, true);
         }
-
         file_put_contents(storage_path('logs/scaffold.log'), $log);
     }
 
@@ -83,10 +82,8 @@ class Scaffold
 
         try {
             if ($this->needsNewProcess($command)) {
-                $this->heading($command);
                 $this->handleCommandWithNewProcess($command);
             } else {
-                $this->heading("php artisan ${command}");
                 $process = app(Kernel::class);
                 $process->call($command);
                 $output = $process->output();
