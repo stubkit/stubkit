@@ -35,9 +35,39 @@ class Scaffold
 
         $this->syntax->make($variables, config('stubkit.variables.*', []));
 
-        foreach ($commands as $command) {
-            $this->executeTheCommand($command);
+        $progressBar = $this->maker->getOutput()->createProgressBar(count($commands));
+
+        $progressBar->setFormat("[<fg=red>%bar%</>][%step%/%steps%] %command%\n%result%");
+        $progressBar->setMessage(count($commands),'steps');
+        $progressBar->setMessage('0','step');
+        $progressBar->setMessage('Preparing..','command');
+        $progressBar->setBarWidth(count($commands));
+        $progressBar->setMessage('', 'result');
+        $progressBar->start();
+
+        $log = '';
+
+        $divider = str_repeat('-', 50);
+
+        foreach ($commands as $index => $command) {
+            $command = $this->syntax->parse($command);
+            $output = $this->executeTheCommand($command);
+            $log .= "$divider\n> $command\n$divider\n$output\n\n";
+            $progressBar->setMessage($index,'step');
+            $progressBar->setMessage($command,'command');
+            // $progressBar->setMessage($output, 'result');
+            $progressBar->advance();
         }
+
+        $progressBar->setMessage(count($commands),'step');
+        $progressBar->setMessage($this->syntax->get('scaffold.studly') .' scaffolded.','command');
+        $progressBar->finish();
+
+        if(!is_dir(storage_path('logs'))) {
+            mkdir(storage_path('logs'), 0777, true);
+        }
+
+        file_put_contents(storage_path('logs/scaffold.log'), $log);
     }
 
     /**
@@ -49,8 +79,6 @@ class Scaffold
      */
     public function executeTheCommand(string $command)
     {
-        $command = $this->syntax->parse($command);
-
         $output = '';
 
         try {
@@ -62,14 +90,13 @@ class Scaffold
                 $process = app(Kernel::class);
                 $process->call($command);
                 $output = $process->output();
+
             }
         } catch (Exception $e) {
             $output = $e->getMessage();
         }
 
-        $this->maker->info(trim($output));
-
-        return $output;
+        return trim($output);
     }
 
     /**
@@ -103,7 +130,7 @@ class Scaffold
         $process = Process::fromShellCommandline($command);
 
         $process->run(function ($type, $buffer) {
-            $this->maker->line($buffer);
+            // $this->maker->line($buffer);
         });
     }
 
@@ -121,19 +148,5 @@ class Scaffold
         }
 
         return $output;
-    }
-
-    /**
-     * Make a bulky heading for the console output.
-     *
-     * @param string $phrase
-     *
-     * @return void
-     */
-    public function heading(string $phrase)
-    {
-        $this->maker->comment('----------------------------------------------------------');
-        $this->maker->comment("| ${phrase}");
-        $this->maker->comment('----------------------------------------------------------');
     }
 }
