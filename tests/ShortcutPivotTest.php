@@ -41,7 +41,12 @@ class ShortcutPivotTest extends TestCase
 
     public function test_pivot_option_creates_pivot_scaffolding()
     {
+        mkdir(base_path('stubs'));
+        file_put_contents(base_path('stubs/routes.pivot.stub'), '');
+        file_put_contents(base_path('stubs/controller.pivot.stub'), '');
+
         $this->artisan('make:scaffold UserProperty --pivot="User,Property"');
+
         $this->assertFileExists(base_path('app/Http/Controllers/UserPropertyController.php'));
     }
 }

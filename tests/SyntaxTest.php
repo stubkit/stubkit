@@ -164,4 +164,42 @@ class SyntaxTest extends TestCase
         $this->assertEquals('Sara', $syntax->get('user.upper'));
         $this->assertEquals(null, $syntax->get('missing'));
     }
+
+    public function test_get_is_cached()
+    {
+        $variables = [
+            'user' => [
+                'created_at' => function ($value) {
+                    return microtime();
+                },
+            ],
+        ];
+
+        $syntax = (new Syntax())->make(['user' => 'sara'], [], $variables);
+
+        $first = $syntax->get('user.created_at');
+
+        sleep(1);
+
+        $this->assertEquals($first, $syntax->get('user.created_at'));
+    }
+
+    public function test_parse_is_cached()
+    {
+        $variables = [
+            'user' => [
+                'created_at' => function ($value) {
+                    return microtime();
+                },
+            ],
+        ];
+
+        $syntax = (new Syntax())->make(['user' => 'sara'], [], $variables);
+
+        $first = $syntax->parse('{{ user.created_at }}');
+
+        sleep(1);
+
+        $this->assertEquals($first, $syntax->parse('{{ user.created_at }}'));
+    }
 }
