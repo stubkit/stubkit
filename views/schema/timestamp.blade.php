@@ -1,1 +1,1 @@
-$table->timestamp('{{ $field->snake() }}');
+$table->timestamp('{{ $field->snake() }}')->nullable();

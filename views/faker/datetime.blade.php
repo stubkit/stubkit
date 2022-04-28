@@ -1,1 +1,1 @@
-'{{ $field->snake() }}' => $this->faker->dateTime(),
+'{{ $field->snake() }}' => now()->addDays(rand(0, 5)),
