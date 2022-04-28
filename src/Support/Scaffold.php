@@ -55,7 +55,7 @@ class Scaffold
             $log .= "$divider\n> $command\n$divider\n$output\n\n";
             $progressBar->setMessage($index,'step');
             $progressBar->setMessage($command,'command');
-            // $progressBar->setMessage($output, 'result');
+            $progressBar->setMessage($output, 'result');
             $progressBar->advance();
         }
 
@@ -66,7 +66,10 @@ class Scaffold
         if(!is_dir(storage_path('logs'))) {
             mkdir(storage_path('logs'), 0777, true);
         }
-        file_put_contents(storage_path('logs/scaffold.log'), $log);
+
+        $name = $this->syntax->get('scaffold.snake');
+
+        file_put_contents(storage_path('logs/scaffold-'. $name .'.log'), $log);
     }
 
     /**

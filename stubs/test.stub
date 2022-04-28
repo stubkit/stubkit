@@ -8,15 +8,93 @@ use Tests\TestCase;
 
 class {{ class }} extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-        $response = $this->get('/');
+    use RefreshDatabase;
+    use WithFaker;
 
-        $response->assertStatus(200);
+    public function test_auth_for_{{ model.snakePlural }}()
+    {
+        $this->get('/{{ model.slugPlural }}')->assertUnauthorized();
+    }
+
+    public function test_listing_{{ model.snakePlural }}()
+    {
+        $this->be(User::factory()->create());
+
+        ${{ model.camel }} = {{ model.studly }}::factory(10)->create();
+
+        $this->get('/{{ model.slugPlural }}')
+                ->assertOk()
+                ->assertSee('{{ model.titlePlural }}')
+                ->assertViewHas('{{ model.camelPlural }}', function(${{ model.camelPlural }}) {
+                    return ${{ model.camelPlural }}->count() == 10;
+                });
+    }
+
+    public function test_creating_{{ model.snakePlural }}()
+    {
+        $this->be(User::factory()->create());
+
+        $this->get('/{{ model.slugPlural }}/new')
+            ->assertOk()
+            ->assertSee('Create {{ model.title }}');
+    }
+
+    public function test_storing_{{ model.snakePlural }}()
+    {
+        $this->be(User::factory()->create());
+
+        $this->assertEquals(0, {{ model.studly }}::count());
+
+        $this->post('/{{ model.slugPlural }}/new', [
+            {{ fields.faker }}
+        ])->assertOk();
+
+        $this->assertEquals(1, {{ model.studly }}::count());
+    }
+
+    public function test_storing_invalid_{{ model.snakePlural }}()
+    {
+        $this->be(User::factory()->create());
+
+        $this->post('/{{ model.slugPlural }}/new', [])
+            ->assertStatus(422);
+    }
+
+    public function test_updating_{{ model.snakePlural }}()
+    {
+        $this->be(User::factory()->create());
+
+        ${{ model.camel }} = {{ model.studly }}::factory()->create();
+
+        $this->put("/{{ model.slugPlural }}/${{ model.camel }}->id", [
+            {{ fields.faker }}
+        ])->assertOk();
+
+        $this->assertNotEquals(
+            ${{ model.camel }}->toArray()
+            ${{ model.camel }}->fresh()->toArray(),
+        );
+    }
+
+    public function test_updating_invalid_{{ model.snakePlural }}()
+    {
+        $this->be(User::factory()->create());
+
+        ${{ model.camel }} = {{ model.studly }}::factory()->create();
+
+        $this->put('/{{ model.slugPlural }}/${{ model.camel }}->id', [])
+            ->assertStatus(422);
+    }
+
+    public function test_deleting_{{ model.snakePlural }}()
+    {
+        $this->be(User::factory()->create());
+
+        ${{ model.camel }} = {{ model.studly }}::factory()->create();
+
+        $this->delete("/{{ model.slugPlural }}/${{ model.camel }}->id")
+            ->assertOk();
+
+        $this->assertEquals(0, {{ model.studly }}::count());
     }
 }
